@@ -1,0 +1,17 @@
+{
+  "name": "HexNetGroup",
+  "short_name": "HexNet",
+  "icons": [
+    {
+      "src": "/apple-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#0a0a0f",
+  "background_color": "#0a0a0f",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait"
+}
