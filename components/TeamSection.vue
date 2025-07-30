@@ -1,8 +1,6 @@
 <template>
   <section id="team" class="section team-section">
     <div class="container">
-      <h2 class="section-title">Наша команда</h2>
-      
       <div class="team-grid">
         <div v-for="(member, index) in teamMembers" :key="index" class="team-member" :style="{'--delay': `${index * 0.1}s`}">
           <div class="member-card">
@@ -10,7 +8,6 @@
               <div class="member-image">
                 <img :src="member.photo" :alt="member.name">
               </div>
-              <div class="member-glow" :style="{'--glow-color': member.glowColor}"></div>
             </div>
             <div class="member-info">
               <h3 class="member-name">{{ member.name }}</h3>
@@ -20,12 +17,6 @@
                   <i :class="social.icon"></i>
                 </a>
               </div>
-            </div>
-            <div class="card-corners">
-              <span class="corner top-left"></span>
-              <span class="corner top-right"></span>
-              <span class="corner bottom-left"></span>
-              <span class="corner bottom-right"></span>
             </div>
           </div>
         </div>
@@ -37,8 +28,13 @@
       </div>
     </div>
     
-    <div class="team-bg-grid"></div>
-    <div class="team-bg-glow"></div>
+    <!-- Вертикальный текст слева -->
+    <div class="vertical-text">
+      <span>T</span>
+      <span>E</span>
+      <span>A</span>
+      <span>M</span>
+    </div>
   </section>
 </template>
 
@@ -47,12 +43,19 @@ const teamMembers = [
   {
     name: 'Әлбосын Саян',
     position: 'Директор',
-    photo: '/images/team/team1.jpg',
+    photo: '/images/team/Sayan.jfif',
     glowColor: 'var(--color-neon-blue)',
     social: [
       { name: 'LinkedIn', icon: 'fab fa-linkedin-in', link: '#' },
       { name: 'Twitter', icon: 'fab fa-twitter', link: '#' }
     ]
+  },
+  {
+    name: 'Мукушева Азиза',
+    position: 'Менеджер проектов',
+    photo: '/images/team/Aziza.jfif',
+    glowColor: 'var(--color-neon-purple)',
+    social: []
   },
   {
     name: 'Жанат Алмаз',
@@ -107,7 +110,6 @@ onMounted(() => {
 .team-section {
   position: relative;
   overflow: hidden;
-  background-color: rgba(10, 10, 15, 0.95);
 }
 
 .team-grid {
@@ -115,6 +117,7 @@ onMounted(() => {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 40px;
   margin-bottom: 80px;
+  margin-top: 50px;
 }
 
 .team-member {
@@ -135,7 +138,8 @@ onMounted(() => {
   position: relative;
   height: 100%;
   backdrop-filter: blur(10px);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.5s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .member-card:hover {
@@ -166,23 +170,6 @@ onMounted(() => {
 
 .member-card:hover .member-image img {
   transform: scale(1.05);
-}
-
-.member-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-}
-
-.member-card:hover .member-glow {
-  opacity: 0.3;
 }
 
 .member-info {
@@ -236,56 +223,13 @@ onMounted(() => {
 }
 
 .social-icon:hover {
-  border-color: var(--color-neon-blue);
-  box-shadow: var(--glow-blue);
-  color: var(--color-neon-blue);
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .social-icon:hover::before {
   left: 100%;
-}
-
-/* Углы карточек */
-.card-corners .corner {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border-color: var(--color-neon-blue);
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-.corner.top-left {
-  top: 0;
-  left: 0;
-  border-top: 2px solid;
-  border-left: 2px solid;
-}
-
-.corner.top-right {
-  top: 0;
-  right: 0;
-  border-top: 2px solid;
-  border-right: 2px solid;
-}
-
-.corner.bottom-left {
-  bottom: 0;
-  left: 0;
-  border-bottom: 2px solid;
-  border-left: 2px solid;
-}
-
-.corner.bottom-right {
-  bottom: 0;
-  right: 0;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-}
-
-.member-card:hover .corner {
-  opacity: 1;
-  box-shadow: var(--glow-blue);
 }
 
 /* CTA секция */
@@ -300,23 +244,7 @@ onMounted(() => {
   text-align: center;
   position: relative;
   overflow: hidden;
-}
-
-.team-cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: linear-gradient(45deg, var(--color-neon-blue), var(--color-neon-purple)) border-box;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .team-cta p {
@@ -328,42 +256,62 @@ onMounted(() => {
   text-decoration: none;
 }
 
-/* Фоновые элементы */
-.team-bg-grid {
+/* Вертикальный текст */
+.vertical-text {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle, rgba(15, 247, 255, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.3;
-  z-index: -1;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
 }
 
-.team-bg-glow {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, var(--color-neon-blue-dark) 0%, transparent 70%);
-  filter: blur(100px);
-  opacity: 0.2;
-  bottom: -250px;
-  right: -250px;
-  z-index: -1;
-  animation: rotate 20s infinite linear;
+.vertical-text span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  display: block;
+  animation: fadeInLetters 1.5s forwards;
+  opacity: 0;
 }
 
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.vertical-text:hover span {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
+}
+
+.vertical-text span:nth-child(1) { animation-delay: 0.1s; }
+.vertical-text span:nth-child(2) { animation-delay: 0.2s; }
+.vertical-text span:nth-child(3) { animation-delay: 0.3s; }
+.vertical-text span:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInLetters {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
   .team-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+  }
+  
+  .vertical-text {
+    display: none;
   }
 }
 

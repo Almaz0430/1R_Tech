@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <div class="global-background"></div>
     <AppHeader />
     <NuxtPage />
     <AppFooter />
@@ -79,7 +80,6 @@ html {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -95,6 +95,8 @@ h1, h2, h3, h4, h5 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  background-color: var(--color-bg);
 }
 
 main {
@@ -129,9 +131,8 @@ main {
   left: 50%;
   transform: translateX(-50%);
   width: 100px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-neon-blue), var(--color-neon-blue-dark));
-  box-shadow: var(--glow-blue);
+  height: 2px;
+  background: #fff;
 }
 
 @keyframes fadeIn {
@@ -146,16 +147,14 @@ main {
 
 .neon-border {
   position: relative;
-  border: 1px solid transparent;
-  border-image: linear-gradient(45deg, var(--color-neon-blue), var(--color-neon-blue-dark), var(--color-neon-pink), var(--color-neon-green)) 1;
-  box-shadow: var(--glow-blue);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .btn {
   font-family: 'Orbitron', sans-serif;
   background: transparent;
   color: var(--color-text);
-  border: 1px solid var(--color-neon-blue);
+  border: 1px solid #fff;
   padding: 10px 25px;
   font-size: 1rem;
   text-transform: uppercase;
@@ -164,12 +163,10 @@ main {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: var(--glow-blue);
 }
 
 .btn:hover {
-  background: rgba(15, 247, 255, 0.1);
-  box-shadow: 0 0 15px var(--color-neon-blue);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .btn::before {
@@ -179,12 +176,45 @@ main {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(15, 247, 255, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: all 0.6s;
 }
 
 .btn:hover::before {
   left: 100%;
+}
+
+.global-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: url('@/public/images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+}
+
+.global-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle, rgba(0, 153, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(circle, rgba(0, 255, 204, 0.15) 2px, transparent 2px);
+  background-size: 30px 30px, 50px 50px;
+  background-position: 0 0, 25px 25px;
+  animation: particleMove 8s linear infinite;
+}
+
+@keyframes particleMove {
+  0% { background-position: 0 0, 25px 25px; }
+  100% { background-position: 30px 30px, 55px 55px; }
 }
 
 @media (max-width: 768px) {

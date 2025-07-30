@@ -1,8 +1,6 @@
 <template>
   <section id="contact" class="section contact-section">
     <div class="container">
-      <h2 class="section-title">Связаться с нами</h2>
-      
       <div class="contact-container">
         <div class="contact-info">
           <div class="info-box">
@@ -11,7 +9,7 @@
             </div>
             <div class="info-content">
               <h3>Адрес</h3>
-              <p>Астана, Казахстан</p>
+              <p>Астана, Кабанбай батыра 51</p>
             </div>
           </div>
           
@@ -21,7 +19,7 @@
             </div>
             <div class="info-content">
               <h3>Телефон</h3>
-              <p>Временно недоступен</p>
+              <p>+ 777 035 40 84</p>
             </div>
           </div>
           
@@ -38,16 +36,14 @@
           <div class="contact-button-container">
             <a href="mailto:almaz.zh7@gmail.com" class="btn contact-btn">
               <i class="fas fa-envelope"></i> Написать нам
-              <div class="btn-glow"></div>
             </a>
           </div>
         </div>
         
         <div class="map-container">
-          <div class="map-overlay"></div>
           <div class="map-frame">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d75517.18700516618!2d71.39498782230436!3d51.128942753782696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424580c47db54609%3A0x97f9148dddb19228!2z0JDRgdGC0LDQvdCwIDAwMDAwMCwg0JrQsNC30LDRhdGB0YLQsNC9!5e0!3m2!1sru!2sru!4v1688398618122!5m2!1sru!2sru" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.4235055990035!2d71.4114843!3d51.1221205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245841c5b9d7e9b%3A0x7c3d5a2a3c5f5e4a!2z0J_RgNC-0YHQvy4g0JrQsNCx0LDQvdCx0LDQuSDQkdCw0YLRi9GA0LAsIDUxLCDQkNGB0YLQsNC90LAsINCa0LDQt9Cw0YXRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1688398618122!5m2!1sru!2sru" 
               width="100%" 
               height="100%" 
               style="border:0;" 
@@ -59,10 +55,15 @@
       </div>
     </div>
     
-    <div class="neon-circles">
-      <div class="neon-circle circle1"></div>
-      <div class="neon-circle circle2"></div>
-      <div class="neon-circle circle3"></div>
+    <!-- Вертикальный текст слева -->
+    <div class="vertical-text">
+      <span>C</span>
+      <span>O</span>
+      <span>N</span>
+      <span>T</span>
+      <span>A</span>
+      <span>C</span>
+      <span>T</span>
     </div>
   </section>
 </template>
@@ -90,7 +91,6 @@ onMounted(() => {
 <style scoped>
 .contact-section {
   position: relative;
-  background-color: rgba(10, 10, 15, 0.9);
   overflow: hidden;
 }
 
@@ -99,6 +99,7 @@ onMounted(() => {
   grid-template-columns: 1fr 1fr;
   gap: 50px;
   margin-bottom: 60px;
+  margin-top: 50px;
 }
 
 /* Информационная панель */
@@ -109,26 +110,8 @@ onMounted(() => {
   backdrop-filter: blur(10px);
   position: relative;
   overflow: hidden;
-  border: 1px solid transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.5s ease;
-}
-
-.contact-info::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: linear-gradient(45deg, var(--color-neon-blue), var(--color-neon-blue-dark)) border-box;
-  -webkit-mask:
-     linear-gradient(#fff 0 0) padding-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.7;
 }
 
 .info-box {
@@ -161,15 +144,14 @@ onMounted(() => {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: rgba(15, 247, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 15px;
-  color: var(--color-neon-blue);
+  color: #fff;
   font-size: 1.2rem;
-  box-shadow: var(--glow-blue);
-  border: 1px solid var(--color-neon-blue);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .info-content h3 {
@@ -181,62 +163,6 @@ onMounted(() => {
 .info-content p {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
-}
-
-/* Социальные ссылки */
-.social-links {
-  display: flex;
-  gap: 15px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
-}
-
-.social-links.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(20, 20, 30, 0.8);
-  color: var(--color-text);
-  font-size: 1rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.social-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.social-link:hover {
-  background-color: rgba(15, 247, 255, 0.1);
-  border-color: var(--color-neon-blue);
-  color: var(--color-neon-blue);
-  box-shadow: var(--glow-blue);
-  transform: translateY(-3px);
-}
-
-.social-link:hover::before {
-  left: 100%;
 }
 
 /* Кнопка контакта */
@@ -269,20 +195,6 @@ onMounted(() => {
   font-size: 1.2rem;
 }
 
-.btn-glow {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(15, 247, 255, 0.3), transparent);
-  transition: all 0.6s;
-}
-
-.contact-btn:hover .btn-glow {
-  left: 100%;
-}
-
 /* Карта */
 .map-container {
   position: relative;
@@ -294,43 +206,12 @@ onMounted(() => {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .map-container.in-view {
   opacity: 1;
   transform: translateY(0);
-}
-
-.map-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background: linear-gradient(45deg, var(--color-neon-blue), var(--color-neon-blue-dark), var(--color-neon-green)) border-box;
-  -webkit-mask:
-     linear-gradient(#fff 0 0) padding-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.map-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-neon-blue);
-  opacity: 0.1;
-  z-index: 1;
-  pointer-events: none;
-  mix-blend-mode: color;
 }
 
 .map-frame {
@@ -339,55 +220,55 @@ onMounted(() => {
   height: 100%;
 }
 
-/* Неоновые круги фона */
-.neon-circles {
+/* Вертикальный текст */
+.vertical-text {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -1;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
 }
 
-.neon-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.2;
+.vertical-text span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  margin: 2px 0;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  display: block;
+  animation: fadeInLetters 1.5s forwards;
+  opacity: 0;
 }
 
-.circle1 {
-  top: -150px;
-  left: -150px;
-  width: 400px;
-  height: 400px;
-  background-color: var(--color-neon-blue);
-  animation: float 15s infinite alternate ease-in-out;
+.vertical-text:hover span {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
 }
 
-.circle2 {
-  bottom: 10%;
-  right: -100px;
-  width: 300px;
-  height: 300px;
-  background-color: var(--color-neon-blue-dark);
-  animation: float 12s infinite alternate-reverse ease-in-out;
-}
+.vertical-text span:nth-child(1) { animation-delay: 0.1s; }
+.vertical-text span:nth-child(2) { animation-delay: 0.2s; }
+.vertical-text span:nth-child(3) { animation-delay: 0.3s; }
+.vertical-text span:nth-child(4) { animation-delay: 0.4s; }
+.vertical-text span:nth-child(5) { animation-delay: 0.5s; }
+.vertical-text span:nth-child(6) { animation-delay: 0.6s; }
+.vertical-text span:nth-child(7) { animation-delay: 0.7s; }
 
-.circle3 {
-  top: 40%;
-  left: 30%;
-  width: 200px;
-  height: 200px;
-  background-color: var(--color-neon-green);
-  animation: float 18s infinite alternate ease-in-out;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(30px, -30px); }
+@keyframes fadeInLetters {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 992px) {
@@ -400,14 +281,9 @@ onMounted(() => {
   .map-container {
     height: 300px;
   }
-}
-
-.team-cta p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.team-cta a {
-  text-decoration: none;
+  
+  .vertical-text {
+    display: none;
+  }
 }
 </style> 

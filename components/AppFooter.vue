@@ -1,7 +1,5 @@
 <template>
   <footer class="footer">
-    <div class="footer-glow"></div>
-    
     <div class="container footer-container">
       <div class="footer-logo">
         <NuxtLink to="/" class="footer-logo-link">
@@ -31,8 +29,8 @@
       <div class="footer-contact">
         <h3 class="footer-heading">Контакты</h3>
         <div class="footer-contact-info">
-          <p><i class="fas fa-map-marker-alt"></i> Астана, Казахстан</p>
-          <p><i class="fas fa-phone-alt"></i> Временно недоступен</p>
+          <p><i class="fas fa-map-marker-alt"></i> Астана, Кабанбай батыра 51</p>
+          <p><i class="fas fa-phone-alt"></i> + 777 035 40 84</p>
           <p><i class="fas fa-envelope"></i> almaz.zh7@gmail.com</p>
         </div>
       </div>
@@ -51,10 +49,7 @@
     
     <button class="back-to-top" @click="scrollToTop">
       <i class="fas fa-chevron-up"></i>
-      <span class="btn-glow"></span>
     </button>
-    
-    <div class="footer-grid"></div>
   </footer>
 </template>
 
@@ -117,7 +112,6 @@ onMounted(() => {
 
 <style scoped>
 .footer {
-  background-color: rgba(10, 10, 15, 1);
   position: relative;
   overflow: hidden;
   padding-top: 60px;
@@ -147,17 +141,13 @@ onMounted(() => {
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: 1px;
-  background-image: linear-gradient(90deg, var(--color-text) 0%, var(--color-neon-blue) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #fff;
   position: relative;
   display: inline-block;
 }
 
 .logo-highlight {
-  color: var(--color-neon-blue-dark);
-  text-shadow: var(--glow-blue-dark);
+  color: #fff;
 }
 
 .logo-text::after {
@@ -166,8 +156,8 @@ onMounted(() => {
   bottom: -5px;
   left: 0;
   width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-neon-blue), transparent);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.5s ease;
@@ -200,8 +190,8 @@ onMounted(() => {
   bottom: -5px;
   left: 0;
   width: 30px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-neon-blue), transparent);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .footer-menu {
@@ -227,12 +217,12 @@ onMounted(() => {
   left: 0;
   width: 0;
   height: 1px;
-  background-color: var(--color-neon-blue);
+  background-color: #fff;
   transition: width 0.3s ease;
 }
 
 .footer-link:hover {
-  color: var(--color-neon-blue);
+  color: #fff;
   padding-left: 5px;
 }
 
@@ -254,7 +244,7 @@ onMounted(() => {
 }
 
 .footer-contact-info i {
-  color: var(--color-neon-blue);
+  color: #fff;
   margin-right: 10px;
   font-size: 0.9rem;
 }
@@ -287,13 +277,12 @@ onMounted(() => {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(15, 247, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
 }
 
 .social-icon:hover {
-  background-color: rgba(15, 247, 255, 0.1);
-  box-shadow: var(--glow-blue);
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
 }
 
@@ -328,7 +317,7 @@ onMounted(() => {
 }
 
 .bottom-link:hover {
-  color: var(--color-neon-blue);
+  color: #fff;
 }
 
 .separator {
@@ -345,8 +334,8 @@ onMounted(() => {
   height: 44px;
   border-radius: 50%;
   background-color: rgba(10, 10, 15, 0.7);
-  border: 1px solid var(--color-neon-blue);
-  color: var(--color-neon-blue);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
   font-size: 1rem;
   display: flex;
   justify-content: center;
@@ -366,50 +355,8 @@ onMounted(() => {
 }
 
 .back-to-top:hover {
-  box-shadow: var(--glow-blue);
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
-}
-
-.btn-glow {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(15, 247, 255, 0.3), transparent);
-  transition: left 0.5s ease;
-}
-
-.back-to-top:hover .btn-glow {
-  left: 100%;
-}
-
-/* Фоновые элементы */
-.footer-grid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(15, 247, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 247, 255, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-  z-index: -1;
-  opacity: 0.5;
-}
-
-.footer-glow {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 200px;
-  background: radial-gradient(ellipse, var(--color-neon-blue) 0%, transparent 70%);
-  filter: blur(70px);
-  opacity: 0.1;
-  z-index: -1;
 }
 
 @media (max-width: 992px) {
