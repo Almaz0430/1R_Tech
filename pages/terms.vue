@@ -104,7 +104,7 @@ useHead({
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   margin-bottom: 40px;
-  margin-left: 120px;
+  margin-left: 80px;
   position: relative;
   color: #fff;
 }
@@ -116,7 +116,7 @@ useHead({
 .content {
   background: transparent;
   border-radius: 0;
-  padding: 0 120px;
+  padding: 0 80px;
   backdrop-filter: none;
   position: relative;
   border: none;
