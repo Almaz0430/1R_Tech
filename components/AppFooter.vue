@@ -3,7 +3,7 @@
     <div class="container footer-container">
       <div class="footer-logo">
         <NuxtLink to="/" class="footer-logo-link">
-          <span class="logo-text">Hex<span class="logo-highlight">Net</span>Group</span>
+          <span class="logo-text">1R_Tech</span>
         </NuxtLink>
         <p class="footer-slogan">Разрабатываем будущее</p>
       </div>
@@ -38,7 +38,7 @@
     
     <div class="footer-bottom">
       <div class="container">
-        <p class="copyright">&copy; {{ currentYear }} HexNetGroup. Все права защищены.</p>
+        <p class="copyright">&copy; {{ currentYear }} 1R_Tech. Все права защищены.</p>
         <div class="footer-bottom-links">
           <NuxtLink to="/privacy" class="bottom-link">Политика конфиденциальности</NuxtLink>
           <span class="separator">|</span>

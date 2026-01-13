@@ -6,7 +6,7 @@
       <div class="content">
         <section class="policy-section">
           <h2>1. Введение</h2>
-          <p>Настоящая Политика конфиденциальности описывает, как HexNetGroup собирает, использует и защищает информацию, которую вы предоставляете при использовании нашего сайта и услуг.</p>
+          <p>Настоящая Политика конфиденциальности описывает, как 1R_Tech собирает, использует и защищает информацию, которую вы предоставляете при использовании нашего сайта и услуг.</p>
         </section>
         
         <section class="policy-section">
@@ -75,154 +75,114 @@ const currentDate = new Date().toLocaleDateString('ru-RU', {
 })
 
 useHead({
-  title: 'Политика конфиденциальности | HexNetGroup',
+  title: 'Политика конфиденциальности | 1R_Tech',
   meta: [
-    { name: 'description', content: 'Политика конфиденциальности HexNetGroup. Узнайте, как мы собираем, используем и защищаем вашу информацию.' },
-    { name: 'keywords', content: 'политика конфиденциальности, защита данных, HexNetGroup, конфиденциальность' },
-    { property: 'og:title', content: 'Политика конфиденциальности | HexNetGroup' },
-    { property: 'og:description', content: 'Узнайте, как HexNetGroup собирает, использует и защищает вашу информацию.' },
+    { name: 'description', content: 'Политика конфиденциальности 1R_Tech. Узнайте, как мы собираем, используем и защищаем вашу информацию.' },
+    { name: 'keywords', content: 'политика конфиденциальности, защита данных, 1R_Tech, конфиденциальность' },
+    { property: 'og:title', content: 'Политика конфиденциальности | 1R_Tech' },
+    { property: 'og:description', content: 'Узнайте, как 1R_Tech собирает, использует и защищает вашу информацию.' },
     { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://hexnetgroup.com/privacy' },
-    { property: 'og:image', content: 'https://hexnetgroup.com/logo.png' },
+    { property: 'og:url', content: 'https://1rtech.com/privacy' },
+    { property: 'og:image', content: 'https://1rtech.com/logo.png' },
     { property: 'og:image:width', content: '192' },
     { property: 'og:image:height', content: '192' },
-    { property: 'og:image:alt', content: 'HexNetGroup логотип' },
-    { name: 'twitter:title', content: 'Политика конфиденциальности | HexNetGroup' },
-    { name: 'twitter:description', content: 'Узнайте, как HexNetGroup собирает, использует и защищает вашу информацию.' },
-    { name: 'twitter:image', content: 'https://hexnetgroup.com/logo.png' },
+    { property: 'og:image:alt', content: '1R_Tech логотип' },
+    { name: 'twitter:title', content: 'Политика конфиденциальности | 1R_Tech' },
+    { name: 'twitter:description', content: 'Узнайте, как 1R_Tech собирает, использует и защищает вашу информацию.' },
+    { name: 'twitter:image', content: 'https://1rtech.com/logo.png' },
     { name: 'robots', content: 'index, follow' },
-    { name: 'canonical', content: 'https://hexnetgroup.com/privacy' }
+    { name: 'canonical', content: 'https://1rtech.com/privacy' }
   ]
 })
 </script>
 
 <style scoped>
 .page-container {
-  background-color: var(--color-bg);
+  background: transparent;
   min-height: 100vh;
-  padding: 120px 0 60px;
+  padding: 120px 0 80px;
   color: var(--color-text);
+  position: relative;
 }
 
 .page-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 40px;
-  text-align: center;
+  margin-left: 120px;
   position: relative;
-  display: inline-block;
-  color: var(--color-neon-blue);
-  text-shadow: var(--glow-blue);
+  color: #fff;
 }
 
 .page-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-neon-blue), transparent);
+  display: none;
 }
 
 .content {
-  background-color: rgba(20, 20, 30, 0.5);
-  border-radius: 8px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
+  background: transparent;
+  border-radius: 0;
+  padding: 0 120px;
+  backdrop-filter: none;
   position: relative;
-  overflow: hidden;
-  border: 1px solid transparent;
-  margin-bottom: 40px;
-}
-
-.content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: linear-gradient(45deg, var(--color-neon-blue), var(--color-neon-blue-dark)) border-box;
-  -webkit-mask:
-     linear-gradient(#fff 0 0) padding-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.7;
-  z-index: -1;
+  border: none;
+  box-shadow: none;
+  max-width: none;
+  margin: 0;
 }
 
 .policy-section {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .policy-section h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: var(--color-text);
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #fff;
+  letter-spacing: 1px;
 }
 
 .policy-section p, .policy-section li {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.6;
-  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
 }
 
 .policy-section ul {
-  padding-left: 20px;
-  margin-bottom: 15px;
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+
+.policy-section li::marker {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .last-updated {
   font-style: italic;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 40px;
-  text-align: right;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 60px;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .back-link {
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: center;
-}
-
-.btn {
-  font-family: 'Orbitron', sans-serif;
-  background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-neon-blue);
-  padding: 10px 25px;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: var(--glow-blue);
-  text-decoration: none;
-  display: inline-block;
-}
-
-.btn:hover {
-  background: rgba(15, 247, 255, 0.1);
-  box-shadow: 0 0 15px var(--color-neon-blue);
 }
 
 @media (max-width: 768px) {
   .page-container {
-    padding: 100px 20px 40px;
+    padding: 120px 20px 60px;
   }
   
   .content {
-    padding: 20px;
+    padding: 30px 20px;
   }
   
   .page-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 }
-</style> 
+</style>
+ 

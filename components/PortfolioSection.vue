@@ -18,6 +18,9 @@
               <div class="portfolio-tech">
                 <span v-for="(tech, index) in project.technologies" :key="index" class="tech-badge">{{ tech }}</span>
               </div>
+              <div v-if="project.link" class="portfolio-actions">
+                <a :href="project.link" target="_blank" class="btn btn-small">Перейти на сайт</a>
+              </div>
             </div>
           </div>
         </div>
@@ -43,10 +46,11 @@
 const projects = ref([
   {
     id: 1,
-    title: 'ProjectManager',
-    description: 'ProjectManager — это комплексная платформа для управления проектами, которая объединяет инструменты для коммуникации, планирования и финансового учета в рамках проектной деятельности.',
-    image: '/images/projects/pm-icon.png',
-    technologies: ['Vue', 'Django', 'PostgreSQL'],
+    title: 'Valik.kz',
+    description: 'Valik.kz — инновационный маркетплейс строительных материалов в Казахстане. Платформа объединяет поставщиков и покупателей, предоставляя удобные инструменты для выбора, заказа и доставки товаров для строительства и ремонта.',
+    image: '/images/projects/logo.svg',
+    technologies: ['Next.js', 'Nuxt', 'E-commerce'],
+    link: 'https://valik.kz',
     category: 'web',
     visible: true
   }
@@ -175,12 +179,16 @@ onMounted(() => {
   height: 350px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .portfolio-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
   transition: transform 0.5s ease;
   filter: brightness(0.9) contrast(1.1);
 }
@@ -242,7 +250,18 @@ onMounted(() => {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+}
+
+.portfolio-actions {
+  margin-top: 30px;
+}
+
+.btn-small {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  display: inline-block;
 }
 
 /* Вертикальный текст */

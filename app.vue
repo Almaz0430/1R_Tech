@@ -33,9 +33,9 @@ useHead({
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'HexNetGroup',
-  url: 'https://hexnetgroup.com',
-  logo: 'https://hexnetgroup.com/logo.png',
+  name: '1R_Tech',
+  url: 'https://1rtech.com',
+  logo: 'https://1rtech.com/logo.png',
   description: 'Современная IT-компания, специализирующаяся на инновационных технологических решениях',
   address: {
     '@type': 'PostalAddress',

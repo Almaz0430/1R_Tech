@@ -1,6 +1,9 @@
 <template>
   <section id="team" class="section team-section">
     <div class="container">
+      <div class="team-title-container">
+        <h3 class="team-title">Наша команда</h3>
+      </div>
       <div class="team-grid">
         <div v-for="(member, index) in teamMembers" :key="index" class="team-member" :style="{'--delay': `${index * 0.1}s`}">
           <div class="member-card">
@@ -41,47 +44,12 @@
 <script setup>
 const teamMembers = [
   {
-    name: 'Әлбосын Саян',
-    position: 'Директор',
-    photo: '/images/team/Sayan.jfif',
-    glowColor: 'var(--color-neon-blue)',
-    social: [
-      { name: 'LinkedIn', icon: 'fab fa-linkedin-in', link: '#' },
-      { name: 'Twitter', icon: 'fab fa-twitter', link: '#' }
-    ]
-  },
-  {
-    name: 'Мукушева Азиза',
-    position: 'Менеджер проектов',
-    photo: '/images/team/Aziza.jfif',
-    glowColor: 'var(--color-neon-purple)',
-    social: []
-  },
-  {
     name: 'Жанат Алмаз',
     position: 'Фронтенд Разработчик',
-    photo: '/images/team/Almaz.png',
+    photo: '/images/team/Almaz.jpg',
     glowColor: 'var(--color-neon-blue-dark)',
     social: [
-      { name: 'GitHub', icon: 'fab fa-github', link: '#' }
-    ]
-  },
-  {
-    name: 'Дё Данил',
-    position: 'Бэкенд разработчик',
-    photo: '/images/team/Danil.png',
-    glowColor: 'var(--color-neon-green)',
-    social: [
-      { name: 'GitHub', icon: 'fab fa-github', link: '#' }
-    ]
-  },
-  {
-    name: 'Жусупов Даниял',
-    position: 'Мобильный разработчик',
-    photo: '/images/team/Daniyal.png',
-    glowColor: 'var(--color-neon-pink)',
-    social: [
-      { name: 'GitHub', icon: 'fab fa-github', link: '#' }
+      { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/Almaz0430' }
     ]
   }
 ]
@@ -129,6 +97,17 @@ onMounted(() => {
 .team-member.in-view {
   opacity: 1;
   transform: translateY(0);
+}
+
+.team-title-container {
+  text-align: center;
+  width: 100%;
+}
+
+.team-title {
+  font-size: 1.8rem;
+  color: var(--color-text);
+  margin-bottom: 30px;
 }
 
 .member-card {

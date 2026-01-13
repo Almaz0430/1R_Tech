@@ -2,7 +2,7 @@
   <header class="header" ref="header">
     <div class="logo">
       <NuxtLink to="/" class="logo-link">
-        <span class="logo-text">Hex<span class="logo-highlight">Net</span>Group</span>
+        <span class="logo-text">1R_Tech</span>
       </NuxtLink>
     </div>
     
@@ -104,7 +104,7 @@ onMounted(() => {
   margin-left: 0;
   padding-left: 0;
   position: absolute;
-  left: 80px;
+  left: 300px;
 }
 
 .logo-link {
@@ -223,7 +223,7 @@ onMounted(() => {
   }
   
   .logo {
-    left: 20px;
+    left: 80px;
   }
   
   .logo-text {

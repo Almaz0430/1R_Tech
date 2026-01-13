@@ -4,7 +4,7 @@
       <div class="about-container">
         <div class="about-content">
           <p class="about-text">
-            <span class="highlight">HexNetGroup</span> — инновационная IT-компания, специализирующаяся на разработке высокотехнологичных решений для бизнеса. Мы создаем программное обеспечение, которое трансформирует индустрии и открывает новые возможности для наших клиентов.
+            <span class="highlight">1R_Tech</span> — инновационная IT-компания, специализирующаяся на разработке высокотехнологичных решений для бизнеса. Мы создаем программное обеспечение, которое трансформирует индустрии и открывает новые возможности для наших клиентов.
           </p>
           <p class="about-text">
             Наша миссия — использовать передовые технологии для решения сложных бизнес-задач, создавая продукты, которые сочетают в себе инновации, качество и надежность.
@@ -22,7 +22,7 @@
             <span class="pulse"></span>
             <span class="pulse delay-1"></span>
             <span class="pulse delay-2"></span>
-            HNG
+            1RT
           </div>
           <div v-if="techVisible" class="tech-orbit" ref="techOrbit">
             <div v-for="(tech, index) in orbitTechs" :key="index" 
