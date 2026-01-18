@@ -1,6 +1,11 @@
 <template>
   <div class="app">
-    <div class="global-background"></div>
+    <div class="global-background">
+      <div class="glow-circle top-right"></div>
+      <div class="glow-circle bottom-left"></div>
+      <div class="glow-circle center"></div>
+    </div>
+    <CustomCursor />
     <AppHeader />
     <NuxtPage />
     <AppFooter />
@@ -56,7 +61,7 @@ onMounted(() => {
 
 <style>
 :root {
-  --color-bg: #0a0a0f;
+  --color-bg: #05050a;
   --color-text: #ffffff;
   --color-neon-blue: #0ff7ff;
   --color-neon-blue-dark: #0066ff;
@@ -72,6 +77,7 @@ onMounted(() => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 html, body {
@@ -119,7 +125,7 @@ main {
 }
 
 .section {
-  padding: 100px 0;
+  padding: 50px 0;
   position: relative;
   overflow: hidden;
 }
@@ -182,6 +188,7 @@ main {
   left: 100%;
 }
 
+/* КРЕАТИВНЫЙ ФОН */
 .global-background {
   position: fixed;
   top: 0;
@@ -189,30 +196,52 @@ main {
   width: 100%;
   height: 100%;
   z-index: 0;
-  background-image: url('@/public/images/hero.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.15;
+  background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #05050a 100%);
+  overflow: hidden;
 }
 
+/* Хак для размытых туманностей - glow circle эффект */
+.global-background::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(ellipse 600px 600px at 85% 15%, rgba(15, 247, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 500px 500px at 10% 85%, rgba(255, 42, 109, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 400px 400px at 50% 50%, rgba(5, 255, 161, 0.05) 0%, transparent 40%);
+  animation: nebulaSpin 60s linear infinite, nebulaBreathe 8s ease-in-out infinite;
+}
+
+/* Сетка и частицы */
 .global-background::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(circle, rgba(0, 153, 255, 0.2) 1px, transparent 1px),
-    radial-gradient(circle, rgba(0, 255, 204, 0.15) 2px, transparent 2px);
-  background-size: 30px 30px, 50px 50px;
-  background-position: 0 0, 25px 25px;
-  animation: particleMove 8s linear infinite;
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+  animation: gridMove 20s linear infinite;
 }
 
-@keyframes particleMove {
-  0% { background-position: 0 0, 25px 25px; }
-  100% { background-position: 30px 30px, 55px 55px; }
+@keyframes nebulaSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gridMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(50px); }
+}
+
+@keyframes nebulaBreathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
 }
 
 @media (max-width: 768px) {
@@ -223,5 +252,53 @@ main {
   .section-title {
     font-size: 2rem;
   }
+}
+
+/* Яркие цветовые пятна (как в Contact) */
+.glow-circle {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-circle.top-right {
+  top: -150px;
+  right: -150px;
+  background: var(--color-neon-blue);
+  animation: float glow 10s ease-in-out infinite;
+}
+
+.glow-circle.bottom-left {
+  bottom: -150px;
+  left: -150px;
+  background: var(--color-neon-pink);
+  animation: float glow 13s ease-in-out infinite reverse;
+}
+
+.glow-circle.center {
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: var(--color-neon-green);
+  opacity: 0.08;
+  filter: blur(150px);
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+@keyframes float-glow {
+  0%, 100% { transform: translate(0, 0); opacity: 0.15; }
+  50% { transform: translate(30px, 20px); opacity: 0.25; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.08; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.15; }
 }
 </style>

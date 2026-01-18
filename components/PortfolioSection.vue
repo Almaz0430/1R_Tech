@@ -1,349 +1,384 @@
 <template>
   <section id="portfolio" class="section portfolio-section">
-    <div class="container">
-      <div class="portfolio-container">
-        <div 
-          v-for="project in filteredProjects" 
-          :key="project.id"
-          class="portfolio-card"
-          :class="{ 'visible': project.visible }"
-        >
-          <div class="portfolio-content-wrapper">
-            <div class="portfolio-image">
-              <img :src="project.image" :alt="project.title">
-            </div>
-            <div class="portfolio-content">
-              <h3 class="portfolio-title">{{ project.title }}</h3>
-              <p class="portfolio-description">{{ project.description }}</p>
-              <div class="portfolio-tech">
-                <span v-for="(tech, index) in project.technologies" :key="index" class="tech-badge">{{ tech }}</span>
+    <div class="container relative-z">
+      <div class="portfolio-header">
+        <h2 class="section-title">Term_Portfolio</h2>
+        <p class="section-subtitle">Архив реализованных проектов и технологических решений.</p>
+      </div>
+
+      <div class="repository-container">
+        <!-- Декоративные элементы репозитория -->
+        <div class="repo-bracket tl"></div>
+        <div class="repo-bracket tr"></div>
+        <div class="repo-bracket bl"></div>
+        <div class="repo-bracket br"></div>
+        
+        <div class="repo-grid">
+          <div 
+            v-for="(project, index) in projects" 
+            :key="project.id"
+            class="data-slab"
+            @mouseenter="activeProject = index"
+            @mouseleave="activeProject = null"
+          >
+            <div class="slab-frame">
+              <div class="slab-id">BLOCK_0{{ index + 1 }}</div>
+              <div class="slab-status">
+                <span class="status-dot"></span>
+                ACTIVE_RECORD
               </div>
-              <div v-if="project.link" class="portfolio-actions">
-                <a :href="project.link" target="_blank" class="btn btn-small">Перейти на сайт</a>
+              
+              <div class="slab-image-container">
+                <div class="scan-line"></div>
+                <img :src="project.image" :alt="project.title" class="slab-image">
+                <div class="image-overlay"></div>
               </div>
+
+              <div class="slab-content">
+                <h3 class="slab-title">{{ project.title }}</h3>
+                <p class="slab-desc">{{ project.description }}</p>
+                
+                <div class="slab-tech-dock">
+                  <span v-for="(tech, tIndex) in project.technologies" :key="tIndex" class="tech-chip">
+                    {{ tech }}
+                  </span>
+                </div>
+
+                <div class="slab-actions" v-if="project.link">
+                  <a :href="project.link" target="_blank" class="repo-btn">
+                    <span class="btn-glitch">DATA_LINK</span>
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Угловые маркеры внутри карточки -->
+              <div class="slab-corner tr"></div>
+              <div class="slab-corner bl"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- Вертикальный текст слева -->
+
+    <!-- Декоративный вертикальный текст -->
     <div class="vertical-text">
+      <span>R</span>
+      <span>E</span>
       <span>P</span>
       <span>O</span>
-      <span>R</span>
-      <span>T</span>
-      <span>F</span>
-      <span>O</span>
-      <span>L</span>
+      <span>S</span>
       <span>I</span>
+      <span>T</span>
       <span>O</span>
+      <span>R</span>
+      <span>Y</span>
     </div>
   </section>
 </template>
 
 <script setup>
-const projects = ref([
+import { ref, onMounted } from 'vue'
+
+const activeProject = ref(null)
+
+const projects = [
   {
     id: 1,
     title: 'Valik.kz',
-    description: 'Valik.kz — инновационный маркетплейс строительных материалов в Казахстане. Платформа объединяет поставщиков и покупателей, предоставляя удобные инструменты для выбора, заказа и доставки товаров для строительства и ремонта.',
+    description: 'Маркетплейс строительных материалов. Платформа объединяет поставщиков и покупателей, облегчая процесс закупки и логистики в сфере строительства.',
     image: '/images/projects/logo.svg',
-    technologies: ['Next.js', 'Nuxt', 'E-commerce'],
-    link: 'https://valik.kz',
-    category: 'web',
-    visible: true
+    technologies: ['Next.js', 'React', 'Django', 'PostgreSQL'],
+    link: 'https://valik.kz'
   }
-])
-
-const categories = [
-  { id: 'all', name: 'Все проекты' },
-  { id: 'web', name: 'Веб-разработка' }
 ]
 
-const activeCategory = ref('all')
-
-// Фильтрация проектов по категории
-const filteredProjects = computed(() => {
-  if (activeCategory.value === 'all') {
-    return projects.value
-  } else {
-    return projects.value.filter(project => project.category === activeCategory.value)
-  }
-})
-
-// Хуки жизненного цикла
 onMounted(() => {
-  // Анимация появления при скролле
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view')
-      }
+      if (entry.isIntersecting) entry.target.classList.add('in-view')
     })
-  }, {
-    threshold: 0.1
-  })
-  
-  document.querySelectorAll('.portfolio-card').forEach(card => {
-    observer.observe(card)
-  })
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.data-slab, .repository-container').forEach(el => {
+    observer.observe(el);
+  });
 })
 </script>
 
 <style scoped>
 .portfolio-section {
   position: relative;
+  background-color: transparent;
+  padding: 60px 0 30px;
 }
 
-.portfolio-container {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  margin-top: 50px;
-}
-
-.portfolio-filter-btn {
-  background: transparent;
-  border: none;
-  color: var(--color-text);
-  padding: 8px 20px;
-  margin: 0 10px 10px;
-  cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+.relative-z {
   position: relative;
-  overflow: hidden;
+  z-index: 5;
 }
 
-.portfolio-filter-btn::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #fff;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
+.portfolio-header {
+  margin-bottom: 60px;
+  text-align: left;
 }
 
-.portfolio-filter-btn:hover {
-  color: #fff;
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  margin-top: -20px;
+  letter-spacing: 1px;
 }
 
-.portfolio-filter-btn:hover::before,
-.portfolio-filter-btn.active::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.portfolio-filter-btn.active {
-  color: #fff;
-}
-
-.portfolio-card {
-  background-color: rgba(20, 20, 30, 0.5);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+/* Контейнер Репозитория (Теперь просто обертка без фона) */
+.repository-container {
+  position: relative;
   opacity: 0;
   transform: translateY(30px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  display: none;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 40px;
 }
 
-.portfolio-card.visible {
-  display: block;
-}
-
-.portfolio-card.in-view {
+.repository-container.in-view {
   opacity: 1;
   transform: translateY(0);
 }
 
-.portfolio-content-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.repo-bracket {
+  display: none; /* Убираем лишние скобки блока */
 }
 
-.portfolio-image {
-  flex: 0 0 40%;
-  height: 350px;
+/* Сетка карточек (теперь в колонку для горизонтальных плиток) */
+.repo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Карточка Data Slab (Горизонтальная) */
+.data-slab {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.data-slab.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slab-frame {
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
   position: relative;
   overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 420px;
+}
+
+.data-slab:hover .slab-frame {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+/* Metadata */
+.slab-id {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 10;
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.slab-status {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: #05ffa1;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Image Section */
+.slab-image-container {
+  flex: 0 0 42%;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.02);
 }
 
-.portfolio-image img {
-  width: 70%;
-  height: 70%;
+.slab-image {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  transition: transform 0.5s ease;
-  filter: brightness(0.9) contrast(1.1);
+  padding: 50px;
+  filter: grayscale(100%) brightness(0.6);
+  opacity: 0.8;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.portfolio-card:hover .portfolio-image img {
-  transform: scale(1.05);
+.data-slab:hover .slab-image {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.1);
 }
 
-.portfolio-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to top, rgba(10, 10, 15, 0.9), transparent);
+/* Content Section */
+.slab-content {
+  flex: 1;
+  padding: 60px;
   display: flex;
-  align-items: flex-end;
-  padding: 15px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
-.portfolio-card:hover .portfolio-overlay {
-  opacity: 1;
+.slab-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+  letter-spacing: 1px;
 }
 
-.portfolio-tech {
+.slab-desc {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  max-width: 550px;
+}
+
+.slab-tech-dock {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 40px;
 }
 
-.tech-badge {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-text);
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.portfolio-content {
-  flex: 0 0 60%;
-  padding: 40px;
-}
-
-.portfolio-title {
-  color: var(--color-text);
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  transition: color 0.3s ease;
-}
-
-.portfolio-card:hover .portfolio-title {
-  color: #fff;
-}
-
-.portfolio-description {
+.tech-chip {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 25px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
-.portfolio-actions {
-  margin-top: 30px;
+.data-slab:hover .tech-chip {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.btn-small {
-  padding: 8px 20px;
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #05ffa1;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #05ffa1;
+  animation: pulseGreen 2s infinite ease-in-out;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 5px #05ffa1; }
+  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #05ffa1; }
+  100% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 5px #05ffa1; }
+}
+
+/* Кнопка перехода (Data Link) */
+.repo-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Orbitron', sans-serif;
   font-size: 0.85rem;
+  color: #fff;
   text-decoration: none;
+  letter-spacing: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: fit-content;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.repo-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  transform: translateX(5px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.repo-btn i {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.repo-btn:hover i {
+  transform: translate(2px, -2px);
+}
+
+/* Глитч эффект для текста кнопки */
+.btn-glitch {
+  position: relative;
   display: inline-block;
 }
 
-/* Вертикальный текст */
-.vertical-text {
-  position: absolute;
-  left: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 5;
+.repo-btn:hover .btn-glitch {
+  animation: glitchText 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  color: #05ffa1;
 }
 
-.vertical-text span {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.2);
-  text-transform: uppercase;
-  margin: 2px 0;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-  display: block;
-  animation: fadeInLetters 1.5s forwards;
-  opacity: 0;
+@keyframes glitchText {
+  0% { transform: translate(0); text-shadow: 0 0 0 transparent; }
+  20% { transform: translate(-2px, 1px); text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+  40% { transform: translate(-2px, -1px); text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+  60% { transform: translate(2px, 1px); text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+  80% { transform: translate(2px, -1px); text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+  100% { transform: translate(0); text-shadow: 0 0 0 transparent; }
 }
 
-.vertical-text:hover span {
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transform: translateX(5px);
-}
-
-.vertical-text span:nth-child(1) { animation-delay: 0.1s; }
-.vertical-text span:nth-child(2) { animation-delay: 0.2s; }
-.vertical-text span:nth-child(3) { animation-delay: 0.3s; }
-.vertical-text span:nth-child(4) { animation-delay: 0.4s; }
-.vertical-text span:nth-child(5) { animation-delay: 0.5s; }
-.vertical-text span:nth-child(6) { animation-delay: 0.6s; }
-.vertical-text span:nth-child(7) { animation-delay: 0.7s; }
-.vertical-text span:nth-child(8) { animation-delay: 0.8s; }
-.vertical-text span:nth-child(9) { animation-delay: 0.9s; }
-
-@keyframes fadeInLetters {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 992px) {
-  .portfolio-content-wrapper {
-    flex-direction: column;
-  }
-  
-  .portfolio-image {
-    flex: 0 0 100%;
-    height: 250px;
-  }
-  
-  .portfolio-content {
-    flex: 0 0 100%;
-    padding: 30px;
-  }
+@media (max-width: 1100px) {
+  .slab-frame { flex-direction: column; min-height: auto; }
+  .slab-image-container { flex: 0 0 300px; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
 }
 
 @media (max-width: 768px) {
-  .portfolio-container {
-    gap: 40px;
-  }
-  
-  .portfolio-title {
-    font-size: 1.5rem;
-  }
-  
-  .vertical-text {
-    display: none;
-  }
+  .slab-content { padding: 30px; }
+  .slab-title { font-size: 1.6rem; }
+  .slab-image-container { flex: 0 0 250px; }
+  .vertical-text { display: none; }
 }
-</style> 
+</style>

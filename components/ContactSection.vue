@@ -1,67 +1,82 @@
 <template>
   <section id="contact" class="section contact-section">
-    <div class="container">
-      <div class="contact-container">
-        <div class="contact-info">
-          <div class="info-box">
-            <div class="info-icon">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <div class="info-content">
-              <h3>Адрес</h3>
-              <p>Астана, Кабанбай батыра 51</p>
-            </div>
-          </div>
-          
-          <div class="info-box">
-            <div class="info-icon">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <div class="info-content">
-              <h3>Телефон</h3>
-              <p>+ 777 035 40 84</p>
-            </div>
-          </div>
-          
-          <div class="info-box">
-            <div class="info-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <div class="info-content">
-              <h3>Email</h3>
-              <p>almaz.zh7@gmail.com</p>
+    <!-- Декоративные фоновые элементы -->
+    <!-- Декоративные фоновые элементы удалены для использования глобального фона -->
+
+    <div class="container relative-z">
+      <div class="contact-header">
+        <h2 class="section-title">Terminal_Contact</h2>
+        <p class="hub-subtitle">Обсудим ваш проект? Оставьте заявку или свяжитесь с нами напрямую.</p>
+      </div>
+
+      <div class="hub-container">
+        <!-- Левая часть: Ноды контактов -->
+        <div class="contact-nodes">
+          <div class="node-wrapper" v-for="(node, index) in contactNodes" :key="index">
+            <div class="contact-node" :class="node.type">
+              <div class="node-glow"></div>
+              <div class="node-icon">
+                <i :class="node.icon"></i>
+              </div>
+              <div class="node-content">
+                <span class="node-label">{{ node.label }}</span>
+                <h3 class="node-value">{{ node.value }}</h3>
+              </div>
+              <div class="node-corner top-left"></div>
+              <div class="node-corner bottom-right"></div>
             </div>
           </div>
           
-          <div class="contact-button-container">
-            <a href="mailto:almaz.zh7@gmail.com" class="btn contact-btn">
-              <i class="fas fa-envelope"></i> Написать нам
+          <div class="cta-node-wrapper">
+            <a href="mailto:almaz.zh7@gmail.com" class="cta-node">
+              <span class="btn-text">INITIALIZE_CHAT</span>
+              <div class="btn-scanner"></div>
             </a>
           </div>
         </div>
-        
-        <div class="map-container">
-          <div class="map-frame">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.4235055990035!2d71.4114843!3d51.1221205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245841c5b9d7e9b%3A0x7c3d5a2a3c5f5e4a!2z0J_RgNC-0YHQvy4g0JrQsNCx0LDQvdCx0LDQuSDQkdCw0YLRi9GA0LAsIDUxLCDQkNGB0YLQsNC90LAsINCa0LDQt9Cw0YXRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1688398618122!5m2!1sru!2sru" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy">
-            </iframe>
+
+        <!-- Правая часть: Карта-сканер -->
+        <div class="map-hub">
+          <div class="map-scanner-frame">
+            <div class="scanner-header">
+              <div class="scanner-status">
+                <span class="status-dot"></span>
+                <span class="status-text">LOCATION_LOCKED</span>
+              </div>
+              <div class="scanner-coords">
+                <span>LAT: 51.1221</span>
+                <span>LNG: 71.4115</span>
+              </div>
+            </div>
+            
+            <div class="map-window">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.4235055990035!2d71.4114843!3d51.1221205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245841c5b9d7e9b%3A0x7c3d5a2a3c5f5e4a!2z0J_RgNC-0YHQvy4g0JrQsNCx0LDQvdCx0LDQuSDQkdCw0YLRi9GA0LAsIDUxLCDQkNGB0YLQsNC90LAsINCa0LDQt9Cw0YXRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1688398618122!5m2!1sru!2sru" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+              </iframe>
+              <div class="map-overlay"></div>
+            </div>
+
+            <div class="scanner-footer">
+              <div class="footer-bar"></div>
+              <div class="footer-label">ASTANA_HUB_QUARTER</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Вертикальный текст слева -->
     <div class="vertical-text">
       <span>C</span>
       <span>O</span>
       <span>N</span>
-      <span>T</span>
-      <span>A</span>
+      <span>N</span>
+      <span>E</span>
       <span>C</span>
       <span>T</span>
     </div>
@@ -69,155 +84,362 @@
 </template>
 
 <script setup>
+const contactNodes = [
+  { type: 'address', icon: 'fas fa-map-marker-alt', label: 'ADDRESS_LOC', value: 'Астана, Кабанбай батыра 51' },
+  { type: 'phone', icon: 'fas fa-phone-alt', label: 'VOICE_ID', value: '+7 (777) 035 40 84' },
+  { type: 'email', icon: 'fas fa-envelope', label: 'DATA_STREAM', value: 'almaz.zh7@gmail.com' }
+]
+
 onMounted(() => {
-  // Анимация при скролле
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view')
       }
-    })
-  }, {
-    threshold: 0.1
-  })
-  
-  // Наблюдаем за элементами
-  document.querySelectorAll('.info-box, .map-container, .contact-button-container').forEach(el => {
-    observer.observe(el)
-  })
-})
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.contact-node, .map-hub, .cta-node').forEach(el => {
+    observer.observe(el);
+  });
+});
 </script>
 
 <style scoped>
 .contact-section {
   position: relative;
+  background-color: transparent;
   overflow: hidden;
+  padding: 50px 0;
 }
 
-.contact-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-  margin-bottom: 60px;
-  margin-top: 50px;
-}
-
-/* Информационная панель */
-.contact-info {
-  padding: 30px;
-  background-color: rgba(20, 20, 30, 0.5);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
+.relative-z {
   position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.5s ease;
+  z-index: 5;
 }
 
-.info-box {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 30px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+/* Фоновые эффекты */
+.tech-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.info-box.in-view {
-  opacity: 1;
-  transform: translateY(0);
+.grid-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.info-box:nth-child(1) {
-  transition-delay: 0.1s;
+.grid-line.horizontal {
+  width: 100%;
+  height: 1px;
+  top: 50%;
 }
 
-.info-box:nth-child(2) {
-  transition-delay: 0.2s;
+.grid-line.vertical {
+  width: 1px;
+  height: 100%;
+  left: 30%;
 }
 
-.info-box:nth-child(3) {
-  transition-delay: 0.3s;
-}
-
-.info-icon {
-  width: 50px;
-  height: 50px;
+.glow-circle {
+  position: absolute;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  filter: blur(100px);
+  opacity: 0.1;
+}
+
+.glow-circle.top-right {
+  top: -100px;
+  right: -100px;
+  background: var(--color-neon-blue);
+}
+
+.glow-circle.bottom-left {
+  bottom: -100px;
+  left: -100px;
+  background: var(--color-neon-pink);
+}
+
+/* Заголовок */
+.contact-header {
+  text-align: left;
+  margin-bottom: 70px;
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  margin-top: -20px;
+  letter-spacing: 1px;
+}
+
+/* Контейнер хаба */
+.hub-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: stretch;
+}
+
+/* Ноды контактов */
+.contact-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.contact-node {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.contact-node.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-node:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.02) translateX(10px);
+}
+
+.node-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 15px;
+  font-size: 1.4rem;
   color: #fff;
-  font-size: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-.info-content h3 {
-  color: var(--color-text);
+.contact-node:hover .node-icon {
+  background: rgba(255, 255, 255, 0.15);
+  text-shadow: 0 0 10px #fff;
+}
+
+.node-label {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
   margin-bottom: 5px;
-  font-size: 1.1rem;
 }
 
-.info-content p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
+.node-value {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 500;
 }
 
-/* Кнопка контакта */
-.contact-button-container {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
+.node-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+}
+
+.node-corner.top-left {
+  top: -1px;
+  left: -1px;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+.node-corner.bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+  border-right-color: rgba(255, 255, 255, 0.3);
+}
+
+/* CTA Кнопка */
+.cta-node {
+  margin-top: 20px;
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  padding: 20px 40px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  border: 1px solid transparent;
 }
 
-.contact-button-container.in-view {
+.cta-node.in-view {
   opacity: 1;
   transform: translateY(0);
 }
 
-.contact-btn {
-  padding: 15px 30px;
-  font-size: 1.1rem;
+.cta-node:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-scanner {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: scan 3s infinite;
+}
+
+@keyframes scan {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Карта-сканер */
+.map-hub {
+  position: relative;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.map-hub.in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.map-scanner-frame {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.scanner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.scanner-status {
   display: flex;
   align-items: center;
   gap: 10px;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
 }
 
-.contact-btn i {
-  font-size: 1.2rem;
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-neon-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-neon-blue);
+  animation: pulse-status 2s infinite;
 }
 
-/* Карта */
-.map-container {
+@keyframes pulse-status {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.map-window {
+  flex: 1;
+  min-height: 400px;
+  width: 100%;
   position: relative;
-  height: 100%;
-  min-height: 450px;
-  border-radius: 8px;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000;
 }
 
-.map-container.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.map-frame {
-  position: relative;
+.map-window iframe {
+  display: block;
   width: 100%;
   height: 100%;
+  border: 0;
+  filter: grayscale(1) invert(0.9) contrast(1.2);
+  transition: filter 0.5s ease;
+}
+
+.map-window:hover iframe {
+  filter: grayscale(0.5) invert(0) contrast(1);
+}
+
+.map-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(rgba(10, 10, 15, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(10, 10, 15, 0.3) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.scanner-footer {
+  padding-top: 15px;
+}
+
+.footer-bar {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.footer-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background: #fff;
+}
+
+.footer-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: right;
 }
 
 /* Вертикальный текст */
@@ -236,54 +458,92 @@ onMounted(() => {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.1);
   text-transform: uppercase;
   margin: 2px 0;
   transition: all 0.3s ease;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-  display: block;
-  animation: fadeInLetters 1.5s forwards;
-  opacity: 0;
 }
 
-.vertical-text:hover span {
-  color: rgba(255, 255, 255, 0.8);
+.vertical-text span:hover {
+  color: #fff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transform: translateX(5px);
 }
 
-.vertical-text span:nth-child(1) { animation-delay: 0.1s; }
-.vertical-text span:nth-child(2) { animation-delay: 0.2s; }
-.vertical-text span:nth-child(3) { animation-delay: 0.3s; }
-.vertical-text span:nth-child(4) { animation-delay: 0.4s; }
-.vertical-text span:nth-child(5) { animation-delay: 0.5s; }
-.vertical-text span:nth-child(6) { animation-delay: 0.6s; }
-.vertical-text span:nth-child(7) { animation-delay: 0.7s; }
-
-@keyframes fadeInLetters {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Адаптив */
 @media (max-width: 992px) {
-  .contact-container {
+  .hub-container {
     grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  
+  .contact-header {
+    text-align: center;
+  }
+
+  .tech-bg-overlay {
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .map-container {
-    height: 300px;
+  .contact-section { padding: 40px 0 30px; }
+  
+  .contact-header { margin-bottom: 40px; }
+  
+  .hub-subtitle { font-size: 0.95rem; }
+  
+  .hub-container {
+    gap: 30px;
   }
+  
+  .contact-nodes { gap: 15px; }
+  
+  .contact-node {
+    padding: 20px;
+    gap: 15px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .node-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.1rem;
+  }
+  
+  .node-label { font-size: 0.65rem; }
+  
+  .node-value {
+    font-size: 0.95rem;
+    word-break: break-all;
+  }
+  
+  .cta-node {
+    width: 100%;
+    text-align: center;
+    padding: 16px 30px;
+    font-size: 0.85rem;
+  }
+  
+  .map-scanner-frame { padding: 10px; }
+  
+  .scanner-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 0.7rem;
+  }
+  
+  .scanner-coords { display: flex; gap: 15px; }
+  
+  .map-window {
+    min-height: 250px;
+  }
+  
+  .footer-label { font-size: 0.65rem; }
   
   .vertical-text {
     display: none;
   }
 }
-</style> 
+</style>

@@ -1,23 +1,41 @@
 <template>
   <section id="team" class="section team-section">
-    <div class="container">
-      <div class="team-title-container">
-        <h3 class="team-title">Наша команда</h3>
+    <div class="container relative-z">
+      <div class="team-header">
+        <h2 class="section-title">Terminal_Team</h2>
+        <p class="section-subtitle">Профессиональная команда разработчиков и архитекторов ПО.</p>
       </div>
+
       <div class="team-grid">
         <div v-for="(member, index) in teamMembers" :key="index" class="team-member" :style="{'--delay': `${index * 0.1}s`}">
           <div class="member-card">
-            <div class="member-image-container">
-              <div class="member-image">
-                <img :src="member.photo" :alt="member.name">
+            <!-- Технические углы -->
+            <div class="card-corner top-left"></div>
+            <div class="card-corner bottom-right"></div>
+            
+            <div class="member-id">ID_{{ index + 101 }}</div>
+            
+            <div class="member-image-hub">
+              <div class="member-frame">
+                <img :src="member.photo" :alt="member.name" class="member-photo">
+                <div class="scan-line"></div>
+                <div class="frame-overlay"></div>
+              </div>
+              <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">ACTIVE</span>
               </div>
             </div>
+
             <div class="member-info">
+              <div class="role-tag">ROLE_ID: {{ member.roleCode }}</div>
               <h3 class="member-name">{{ member.name }}</h3>
               <p class="member-position">{{ member.position }}</p>
+              
               <div class="member-social">
-                <a v-for="(social, i) in member.social" :key="i" :href="social.link" class="social-icon" :title="social.name">
+                <a v-for="(social, i) in member.social" :key="i" :href="social.link" class="social-link" :title="social.name">
                   <i :class="social.icon"></i>
+                  <span class="social-label">VIEW_SOURCE</span>
                 </a>
               </div>
             </div>
@@ -25,18 +43,27 @@
         </div>
       </div>
       
-      <div class="team-cta">
-        <p>Хотите присоединиться к нашей команде?</p>
-        <a href="#contact" class="btn">Связаться с нами</a>
+      <div class="team-cta-island">
+        <div class="cta-content">
+          <div class="cta-label">DEPLOY_OPPORTUNITY</div>
+          <h3 class="cta-title">Хотите присоединиться?</h3>
+          <p class="cta-text">Мы всегда рады талантливым специалистам и новым интересным идеям.</p>
+        </div>
+        <a href="#contact" class="cta-btn">
+          INITIALIZE_JOIN_REQ
+          <div class="btn-glow"></div>
+        </a>
       </div>
     </div>
     
     <!-- Вертикальный текст слева -->
     <div class="vertical-text">
-      <span>T</span>
+      <span>O</span>
+      <span>F</span>
+      <span>F</span>
+      <span>I</span>
+      <span>C</span>
       <span>E</span>
-      <span>A</span>
-      <span>M</span>
     </div>
   </section>
 </template>
@@ -45,9 +72,9 @@
 const teamMembers = [
   {
     name: 'Жанат Алмаз',
-    position: 'Фронтенд Разработчик',
+    position: 'Lead Frontend Architect',
+    roleCode: 'ARC_FR_01',
     photo: '/images/team/Almaz.jpg',
-    glowColor: 'var(--color-neon-blue-dark)',
     social: [
       { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/Almaz0430' }
     ]
@@ -55,43 +82,55 @@ const teamMembers = [
 ]
 
 onMounted(() => {
-  // Анимация появления при скролле
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view')
       }
-    })
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  })
-  
-  // Наблюдаем за элементами
-  document.querySelectorAll('.team-member').forEach(member => {
-    observer.observe(member)
-  })
-})
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.team-member, .team-cta-island').forEach(el => {
+    observer.observe(el);
+  });
+});
 </script>
 
 <style scoped>
 .team-section {
   position: relative;
-  overflow: hidden;
+  background-color: transparent;
+  padding: 50px 0;
 }
 
+.relative-z {
+  position: relative;
+  z-index: 5;
+}
+
+.team-header {
+  margin-bottom: 70px;
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  margin-top: -20px;
+  letter-spacing: 1px;
+}
+
+/* Сетка карточек */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 40px;
-  margin-bottom: 80px;
-  margin-top: 50px;
+  margin-bottom: 40px;
 }
 
 .team-member {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) var(--delay);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) var(--delay);
 }
 
 .team-member.in-view {
@@ -99,140 +138,232 @@ onMounted(() => {
   transform: translateY(0);
 }
 
-.team-title-container {
-  text-align: center;
-  width: 100%;
-}
-
-.team-title {
-  font-size: 1.8rem;
-  color: var(--color-text);
-  margin-bottom: 30px;
-}
-
 .member-card {
-  background-color: rgba(15, 15, 25, 0.7);
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  height: 100%;
-  backdrop-filter: blur(10px);
-  transition: transform 0.5s ease;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px 30px;
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
 }
 
 .member-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-.member-image-container {
-  position: relative;
-  padding-top: 100%;
-  overflow: hidden;
-}
-
-.member-image {
+/* Углы */
+.card-corner {
   position: absolute;
-  top: 0;
-  left: 0;
+  width: 15px;
+  height: 15px;
+  border: 2px solid transparent;
+}
+
+.card-corner.top-left { top: 15px; left: 15px; border-top-color: rgba(255, 255, 255, 0.2); border-left-color: rgba(255, 255, 255, 0.2); }
+.card-corner.bottom-right { bottom: 15px; right: 15px; border-bottom-color: rgba(255, 255, 255, 0.2); border-right-color: rgba(255, 255, 255, 0.2); }
+
+.member-id {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+}
+
+/* Контейнер фото */
+.member-image-hub {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 30px;
+}
+
+.member-frame {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
   overflow: hidden;
 }
 
-.member-image img {
+.member-photo {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  filter: grayscale(1);
+  transition: all 0.5s ease;
 }
 
-.member-card:hover .member-image img {
+.member-card:hover .member-photo {
+  filter: grayscale(0);
   transform: scale(1.05);
 }
 
+.scan-line {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: scan 3s infinite;
+  opacity: 0;
+}
+
+.member-card:hover .scan-line {
+  opacity: 1;
+}
+
+@keyframes scan {
+  0% { top: -100%; }
+  100% { top: 200%; }
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #000;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-neon-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--color-neon-blue);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Информация */
 .member-info {
-  padding: 20px;
-  position: relative;
-  z-index: 1;
+  text-align: center;
+}
+
+.role-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 
 .member-name {
-  color: var(--color-text);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  color: #fff;
   margin-bottom: 5px;
-  font-family: 'Orbitron', sans-serif;
 }
 
 .member-position {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.9rem;
+  margin-bottom: 25px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* CTA Остров */
+.team-cta-island {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.team-cta-island.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 3px;
   margin-bottom: 15px;
 }
 
-.member-social {
-  display: flex;
-  gap: 15px;
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  color: var(--color-text);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.social-icon::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.social-icon:hover {
-  border-color: #fff;
+.cta-title {
+  font-size: 1.8rem;
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
 }
 
-.social-icon:hover::before {
-  left: 100%;
+.cta-text {
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 500px;
 }
 
-/* CTA секция */
-.team-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-  padding: 40px;
-  background-color: rgba(15, 15, 25, 0.5);
-  border-radius: 8px;
-  text-align: center;
+.cta-btn {
+  background: #fff;
+  color: #000;
+  padding: 18px 36px;
+  border-radius: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
-.team-cta p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.team-cta a {
-  text-decoration: none;
+.cta-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Вертикальный текст */
@@ -243,7 +374,6 @@ onMounted(() => {
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  align-items: center;
   z-index: 5;
 }
 
@@ -251,55 +381,39 @@ onMounted(() => {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.1);
   text-transform: uppercase;
-  margin: 2px 0;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-  display: block;
-  animation: fadeInLetters 1.5s forwards;
-  opacity: 0;
+  margin: 5px 0;
 }
 
-.vertical-text:hover span {
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transform: translateX(5px);
-}
-
-.vertical-text span:nth-child(1) { animation-delay: 0.1s; }
-.vertical-text span:nth-child(2) { animation-delay: 0.2s; }
-.vertical-text span:nth-child(3) { animation-delay: 0.3s; }
-.vertical-text span:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes fadeInLetters {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 992px) {
+  .team-cta-island {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
   }
 }
 
 @media (max-width: 768px) {
   .team-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .vertical-text {
     display: none;
   }
-}
-
-@media (max-width: 480px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+  
+  .team-cta-island {
+    padding: 30px;
+    margin: 0 15px;
+  }
+  
+  .cta-title {
+    font-size: 1.5rem;
   }
 }
-</style> 
+</style>
+ 
