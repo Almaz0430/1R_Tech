@@ -100,44 +100,37 @@ useHead({
 .page-container {
   background: transparent;
   min-height: 100vh;
-  padding: 120px 0 80px;
+  padding: 140px 0 80px;
   color: var(--color-text);
   position: relative;
+  overflow-x: hidden;
 }
 
 .page-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   margin-bottom: 40px;
-  margin-left: 80px;
   position: relative;
   color: #fff;
-}
-
-.page-title::after {
-  display: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .content {
   background: transparent;
-  border-radius: 0;
-  padding: 0 80px;
-  backdrop-filter: none;
   position: relative;
-  border: none;
-  box-shadow: none;
-  max-width: none;
-  margin: 0;
+  margin-top: 20px;
 }
 
 .policy-section {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  max-width: 900px;
 }
 
 .policy-section h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
   color: #fff;
   letter-spacing: 1px;
 }
@@ -145,13 +138,13 @@ useHead({
 .policy-section p, .policy-section li {
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.8;
-  margin-bottom: 12px;
-  font-size: 1.05rem;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
 }
 
 .policy-section ul {
   padding-left: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .policy-section li::marker {
@@ -161,28 +154,50 @@ useHead({
 .last-updated {
   font-style: italic;
   color: rgba(255, 255, 255, 0.4);
-  margin-top: 60px;
-  text-align: center;
+  margin-top: 80px;
+  text-align: left;
   font-size: 0.9rem;
 }
 
 .back-link {
-  margin-top: 50px;
-  text-align: center;
+  margin-top: 60px;
+  text-align: left;
 }
 
-@media (max-width: 768px) {
-  .page-container {
-    padding: 120px 20px 60px;
-  }
-  
-  .content {
-    padding: 30px 20px;
-  }
-  
+@media (max-width: 992px) {
   .page-title {
     font-size: 2.2rem;
   }
 }
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 110px 0 60px;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+
+  .page-title::after {
+    bottom: -10px;
+    width: 40px;
+  }
+  
+  .policy-section {
+    margin-bottom: 40px;
+  }
+  
+  .policy-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+  
+  .policy-section p, .policy-section li {
+    font-size: 1rem;
+  }
+}
 </style>
+
  

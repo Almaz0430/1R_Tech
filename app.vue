@@ -74,15 +74,22 @@ onMounted(() => {
   box-sizing: border-box;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--color-text);
   line-height: 1.6;
-  overflow-x: hidden;
+}
+
+img, video, iframe, canvas {
+  max-width: 100%;
+  height: auto;
 }
 
 h1, h2, h3, h4, h5 {
@@ -97,6 +104,7 @@ h1, h2, h3, h4, h5 {
   flex-direction: column;
   position: relative;
   background-color: var(--color-bg);
+  overflow-x: hidden;
 }
 
 main {
@@ -113,26 +121,16 @@ main {
 .section {
   padding: 100px 0;
   position: relative;
+  overflow: hidden;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 50px;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
   text-align: center;
   text-transform: uppercase;
   position: relative;
   display: inline-block;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 2px;
-  background: #fff;
 }
 
 @keyframes fadeIn {

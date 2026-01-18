@@ -1,25 +1,27 @@
 <template>
   <header class="header" ref="header">
-    <div class="logo">
-      <NuxtLink to="/" class="logo-link">
-        <span class="logo-text">1R_Tech</span>
-      </NuxtLink>
-    </div>
-    
     <div class="container header-container">
-      <div class="menu-toggle" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="logo">
+        <NuxtLink to="/" class="logo-link">
+          <span class="logo-text">1R_Tech</span>
+        </NuxtLink>
       </div>
       
-      <nav class="nav" :class="{ 'active': isMenuOpen }">
-        <ul class="nav-list">
-          <li v-for="(item, index) in menuItems" :key="index">
-            <a :href="item.href" class="nav-link" @click="closeMenu">{{ item.text }}</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="nav-wrapper">
+        <div class="menu-toggle" @click="toggleMenu" :class="{ 'active': isMenuOpen }">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        
+        <nav class="nav" :class="{ 'active': isMenuOpen }">
+          <ul class="nav-list">
+            <li v-for="(item, index) in menuItems" :key="index">
+              <a :href="item.href" class="nav-link" @click="closeMenu">{{ item.text }}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 </template>
@@ -50,7 +52,7 @@ const closeMenu = () => {
   document.body.style.overflow = ''
 }
 
-// Изменение прозрачности заголовка при прокрутке
+// Изменение прозрачности заголовка при прокурке
 onMounted(() => {
   const handleScroll = () => {
     const scrollPosition = window.scrollY
@@ -78,19 +80,16 @@ onMounted(() => {
   z-index: 100;
   padding: 20px 0;
   transition: all 0.4s ease;
-  display: flex;
-  align-items: center;
-}
-
-.container.header-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
 }
 
 .header-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-wrapper {
+  display: flex;
   align-items: center;
 }
 
@@ -101,50 +100,40 @@ onMounted(() => {
 }
 
 .logo {
-  margin-left: 0;
-  padding-left: 0;
-  position: absolute;
-  left: 300px;
+  display: flex;
+  align-items: center;
 }
 
 .logo-link {
   text-decoration: none;
   color: var(--color-text);
-  padding-left: 0;
+  display: flex;
+  align-items: center;
 }
 
 .logo-text {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 1px;
   color: #fff;
   position: relative;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .logo-highlight {
   color: #fff;
 }
 
-.logo-text::after {
-  display: none;
-}
-
-.logo-link:hover .logo-text::after {
-  transform: none;
-}
-
 .nav-list {
   display: flex;
   list-style: none;
-  margin-right: 30px;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .nav-link {
@@ -174,16 +163,12 @@ onMounted(() => {
 }
 
 .nav-link:hover {
-  color: var(--color-text);
+  opacity: 0.8;
 }
 
 .nav-link:hover::before {
   transform: scaleX(1);
   transform-origin: left;
-}
-
-.contact-btn {
-  margin-left: 15px;
 }
 
 .menu-toggle {
@@ -204,47 +189,28 @@ onMounted(() => {
   transition: all 0.3s ease;
 }
 
-.header-glow {
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3), transparent);
+@media (max-width: 992px) {
+  .nav-link {
+    margin: 0 10px;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 768px) {
   .header {
-    padding: 25px 0;
-  }
-  
-  .header.scrolled {
-    padding: 20px 0;
-  }
-  
-  .logo {
-    left: 80px;
+    padding: 15px 0;
   }
   
   .logo-text {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   
   .menu-toggle {
     display: flex;
-    position: absolute;
-    right: 20px;
-    z-index: 102;
-    width: 35px;
-    height: 25px;
-  }
-
-  .menu-toggle span {
-    height: 3.5px;
   }
 
   .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 6px);
+    transform: rotate(45deg) translate(5px, 5px);
   }
 
   .menu-toggle.active span:nth-child(2) {
@@ -252,43 +218,37 @@ onMounted(() => {
   }
 
   .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -6px);
-  }
-
-  .container.header-container {
-    justify-content: flex-end;
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 
   .nav {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
     width: 100%;
+    max-width: 100%;
     height: 100vh;
     flex-direction: column;
     justify-content: center;
-    background-color: rgba(10, 10, 20, 0.8);
-    backdrop-filter: blur(5px);
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    background-color: rgba(10, 10, 20, 0.98);
+    backdrop-filter: blur(15px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     visibility: hidden;
-    border-left: none;
-    box-shadow: none;
+    z-index: 100;
+    overflow: hidden;
+    transform: translateX(100%);
   }
 
   .nav.active {
-    right: 0;
     opacity: 1;
     visibility: visible;
+    transform: translateX(0);
   }
 
   .nav-list {
     flex-direction: column;
     align-items: center;
-    margin-right: 0;
-    margin-bottom: 30px;
   }
 
   .nav-list li {
@@ -310,8 +270,9 @@ onMounted(() => {
   .nav.active .nav-list li:nth-child(5) { transition-delay: 0.5s; }
 
   .nav-link {
-    font-size: 1.8rem;
-    margin: 15px 0;
+    font-size: 1.5rem;
+    margin: 10px 0;
   }
 }
-</style> 
+</style>
+ 

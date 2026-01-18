@@ -29,7 +29,7 @@
                  class="tech-item" 
                  :class="{ 'flying': isTechFlying, 'sucking': isButtonPressed }"
                  :style="{ 
-                   '--initial-transform': `rotate(${index * (360 / orbitTechs.length)}deg) translateX(150px)`,
+                   '--initial-transform': `rotate(${index * (360 / orbitTechs.length)}deg) translateX(var(--orbit-dist, 150px))`,
                    '--random-x': getRandomValue(-300, 300) + 'px',
                    '--random-y': getRandomValue(-300, 300) + 'px',
                    '--random-rotate': getRandomValue(-360, 360) + 'deg',
@@ -552,7 +552,6 @@ onMounted(() => {
   font-size: 1.1rem;
   color: var(--color-text);
   margin-bottom: 10px;
-  white-space: nowrap;
 }
 
 .feature-desc {
@@ -779,6 +778,19 @@ onMounted(() => {
   
   .vertical-text {
     display: none;
+  }
+
+  .tech-orbit {
+    width: 250px;
+    height: 250px;
+    --orbit-dist: 110px;
+  }
+
+  .tech-item {
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
   }
 }
 </style> 
