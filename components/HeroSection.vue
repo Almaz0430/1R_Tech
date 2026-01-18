@@ -381,64 +381,67 @@ onMounted(() => {
   .hero-meta {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin-bottom: 25px;
   }
   
   .meta-tag {
-    font-size: 0.6rem;
-    padding: 3px 8px;
+    font-size: 0.75rem;
+    padding: 6px 14px;
   }
   
   .hero-title { 
-    font-size: 2.2rem; 
+    font-size: 2.4rem; 
     letter-spacing: -1px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    word-wrap: break-word; /* Ensure fallback wrapping */
   }
   
   .hero-subtitle { 
     font-size: 1rem; 
-    margin-bottom: 30px;
-    padding: 0 10px;
+    margin-bottom: 40px;
+    padding: 0 15px; /* Slightly increased side padding */
+    line-height: 1.5;
   }
   
   .hero-buttons { 
     flex-direction: column; 
     align-items: center;
-    gap: 12px; 
+    gap: 15px; 
     width: 100%;
   }
   
   .hero-btn { 
     min-width: unset;
     width: 100%;
-    max-width: 280px;
-    padding: 14px 30px;
-    font-size: 0.7rem;
+    max-width: 320px;
+    padding: 18px 30px;
+    font-size: 0.9rem;
   }
   
   .vertical-text { display: none; }
   
   .scroll-down {
-    bottom: 30px;
+    bottom: 40px;
   }
   
   .scroll-track {
-    height: 40px;
+    height: 50px;
   }
   
   .hero-bracket {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
   
   .hero-bracket.top-left {
-    top: 20px;
+    top: 25px;
     left: 20px;
   }
   
   .hero-bracket.bottom-right {
-    bottom: 20px;
+    bottom: 25px;
     right: 20px;
   }
 }

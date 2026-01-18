@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <div class="global-background">
+      <ThreeBackground />
       <div class="glow-circle top-right"></div>
       <div class="glow-circle bottom-left"></div>
       <div class="glow-circle center"></div>
@@ -13,6 +14,7 @@
 </template>
 
 <script setup>
+import ThreeBackground from '~/components/ThreeBackground.vue'
 useHead({
   htmlAttrs: {
     lang: 'ru'

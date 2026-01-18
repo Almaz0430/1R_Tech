@@ -1,78 +1,111 @@
 <template>
   <section id="portfolio" class="section portfolio-section">
     <div class="container relative-z">
-      <div class="portfolio-header">
-        <h2 class="section-title">Term_Portfolio</h2>
-        <p class="section-subtitle">Архив реализованных проектов и технологических решений.</p>
-      </div>
-
-      <div class="repository-container">
-        <!-- Декоративные элементы репозитория -->
-        <div class="repo-bracket tl"></div>
-        <div class="repo-bracket tr"></div>
-        <div class="repo-bracket bl"></div>
-        <div class="repo-bracket br"></div>
+      
+      <!-- Console Interface Wrapper -->
+      <div class="console-interface">
         
-        <div class="repo-grid">
-          <div 
-            v-for="(project, index) in projects" 
-            :key="project.id"
-            class="data-slab"
-            @mouseenter="activeProject = index"
-            @mouseleave="activeProject = null"
-          >
-            <div class="slab-frame">
-              <div class="slab-id">BLOCK_0{{ index + 1 }}</div>
-              <div class="slab-status">
-                <span class="status-dot"></span>
-                ACTIVE_RECORD
-              </div>
-              
-              <div class="slab-image-container">
-                <div class="scan-line"></div>
-                <img :src="project.image" :alt="project.title" class="slab-image">
-                <div class="image-overlay"></div>
-              </div>
-
-              <div class="slab-content">
-                <h3 class="slab-title">{{ project.title }}</h3>
-                <p class="slab-desc">{{ project.description }}</p>
-                
-                <div class="slab-tech-dock">
-                  <span v-for="(tech, tIndex) in project.technologies" :key="tIndex" class="tech-chip">
-                    {{ tech }}
-                  </span>
-                </div>
-
-                <div class="slab-actions" v-if="project.link">
-                  <a :href="project.link" target="_blank" class="repo-btn">
-                    <span class="btn-glitch">DATA_LINK</span>
-                    <i class="fas fa-external-link-alt"></i>
-                  </a>
-                </div>
-              </div>
-
-              <!-- Угловые маркеры внутри карточки -->
-              <div class="slab-corner tr"></div>
-              <div class="slab-corner bl"></div>
+        <!-- Console Header -->
+        <div class="console-header">
+          <div class="header-left">
+            <i class="fas fa-terminal"></i>
+            <span class="console-title">TERM_PORTFOLIO // SYSTEM_LOGS</span>
+          </div>
+          <div class="header-right">
+            <span class="connection-status">
+              <span class="status-dot"></span> LIVE_CONNECTION
+            </span>
+            <div class="window-controls">
+              <span>_</span>
+              <span>□</span>
+              <span>×</span>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Декоративный вертикальный текст -->
-    <div class="vertical-text">
-      <span>R</span>
-      <span>E</span>
-      <span>P</span>
-      <span>O</span>
-      <span>S</span>
-      <span>I</span>
-      <span>T</span>
-      <span>O</span>
-      <span>R</span>
-      <span>Y</span>
+        <!-- Console Body (Grid Background) -->
+        <div class="console-body">
+          <div class="grid-overlay"></div>
+          
+          <div class="portfolio-intro">
+            <h2 class="section-title">PROJECT_ARCHIVE</h2>
+            <p class="section-subtitle">Архив реализованных проектов и технологических решений.</p>
+          </div>
+
+          <div class="modules-grid">
+            <div 
+              v-for="(project, index) in projects" 
+              :key="project.id"
+              class="holo-module"
+              :class="{ 'active': activeProject === index }"
+              @mouseenter="activeProject = index"
+              @mouseleave="activeProject = null"
+            >
+              <!-- Module Border Frame -->
+              <div class="module-frame">
+                <div class="corner-accents">
+                  <div class="c-accent tl"></div>
+                  <div class="c-accent tr"></div>
+                  <div class="c-accent bl"></div>
+                  <div class="c-accent br"></div>
+                </div>
+                
+                <div class="file-id">FILE_0{{ index + 1 }}</div>
+
+                <div class="module-layout">
+                  <!-- Project Data Area -->
+                  <div class="module-data">
+                    <div class="data-header">
+                      <div class="project-status">
+                        <i class="fas fa-check-circle"></i>
+                        <span>DEPLOYED</span>
+                      </div>
+                      <div class="project-date">2024.12.20</div>
+                    </div>
+
+                    <div class="project-main-info">
+                      <div class="project-logo-wrapper">
+                        <img :src="project.image" :alt="project.title" class="project-mini-logo">
+                      </div>
+                      <h3 class="module-title">{{ project.title }}</h3>
+                    </div>
+
+                    <p class="module-desc">{{ project.description }}</p>
+
+                    <div class="tech-stack-line">
+                      <span class="stack-label">STACK:</span>
+                      <div class="stack-list">
+                        <span v-for="(tech, tIndex) in project.technologies" :key="tIndex" class="tech-item">
+                          {{ tech }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="module-actions" v-if="project.link">
+                      <a :href="project.link" target="_blank" class="repo-btn">
+                        <span class="btn-glitch">DATA_LINK</span>
+                        <i class="fas fa-external-link-alt"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- Console Footer -->
+        <div class="console-footer">
+          <div class="sys-message">
+            <span class="blink">></span> WAITING_FOR_INPUT...
+          </div>
+          <div class="memory-usage">
+            MEM: 64% // CPU: 32%
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 </template>
@@ -96,21 +129,22 @@ const projects = [
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in-view')
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view')
+      }
     })
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.data-slab, .repository-container').forEach(el => {
-    observer.observe(el);
-  });
+  }, { threshold: 0.1 })
+  
+  const elements = document.querySelectorAll('.holo-module, .console-interface')
+  elements.forEach(el => observer.observe(el))
 })
 </script>
 
 <style scoped>
 .portfolio-section {
-  position: relative;
+  padding: 80px 0;
   background-color: transparent;
-  padding: 60px 0 30px;
+  perspective: 1000px;
 }
 
 .relative-z {
@@ -118,200 +152,303 @@ onMounted(() => {
   z-index: 5;
 }
 
-.portfolio-header {
-  margin-bottom: 60px;
-  text-align: left;
+/* Console Wrapper */
+.console-interface {
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transform: rotateX(2deg);
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.section-subtitle {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.1rem;
-  margin-top: -20px;
+.console-interface.in-view {
+  transform: rotateX(0);
+  opacity: 1;
+}
+
+/* Header */
+.console-header {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
   letter-spacing: 1px;
 }
 
-/* Контейнер Репозитория (Теперь просто обертка без фона) */
-.repository-container {
-  position: relative;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 40px;
-}
+.header-left i { color: #05ffa1; }
 
-.repository-container.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.repo-bracket {
-  display: none; /* Убираем лишние скобки блока */
-}
-
-/* Сетка карточек (теперь в колонку для горизонтальных плиток) */
-.repo-grid {
+.header-right {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Карточка Data Slab (Горизонтальная) */
-.data-slab {
-  position: relative;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 100%;
-}
-
-.data-slab.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.slab-frame {
-  background: rgba(255, 255, 255, 0.01);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 30px;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 420px;
-}
-
-.data-slab:hover .slab-frame {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-5px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.02);
-}
-
-/* Metadata */
-.slab-id {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  z-index: 10;
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 2px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 5px 12px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.slab-status {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  z-index: 10;
+.connection-status {
   display: flex;
   align-items: center;
   gap: 8px;
   font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: #05ffa1;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 5px 12px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Image Section */
-.slab-image-container {
-  flex: 0 0 42%;
-  position: relative;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.2);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slab-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 50px;
-  filter: grayscale(100%) brightness(0.6);
-  opacity: 0.8;
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.data-slab:hover .slab-image {
-  filter: grayscale(0%) brightness(1);
-  transform: scale(1.1);
-}
-
-/* Content Section */
-.slab-content {
-  flex: 1;
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.slab-title {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #fff;
-  letter-spacing: 1px;
-}
-
-.slab-desc {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.8;
-  margin-bottom: 40px;
-  max-width: 550px;
-}
-
-.slab-tech-dock {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-
-.tech-chip {
-  font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 6px 14px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.data-slab:hover .tech-chip {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .status-dot {
   width: 6px;
   height: 6px;
-  background-color: #05ffa1;
+  background: #05ffa1;
   border-radius: 50%;
-  box-shadow: 0 0 10px #05ffa1;
-  animation: pulseGreen 2s infinite ease-in-out;
+  box-shadow: 0 0 8px #05ffa1;
+  animation: pulse 2s infinite;
 }
 
-@keyframes pulseGreen {
-  0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 5px #05ffa1; }
-  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #05ffa1; }
-  100% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 5px #05ffa1; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.window-controls {
+  display: flex;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.window-controls span:hover { color: #fff; }
+
+/* Body */
+.console-body {
+  position: relative;
+  padding: 40px;
+  min-height: 500px;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.portfolio-intro {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Modules Grid */
+.modules-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Holo Module Card */
+.holo-module {
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.module-frame {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px; /* Slightly squarer look */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.holo-module:hover .module-frame {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 30px rgba(5, 255, 255, 0.05);
+}
+
+/* Corners */
+.c-accent {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.c-accent.tl { top: 0; left: 0; border-top-color: rgba(255, 255, 255, 0.2); border-left-color: rgba(255, 255, 255, 0.2); }
+.c-accent.tr { top: 0; right: 0; border-top-color: rgba(255, 255, 255, 0.2); border-right-color: rgba(255, 255, 255, 0.2); }
+.c-accent.bl { bottom: 0; left: 0; border-bottom-color: rgba(255, 255, 255, 0.2); border-left-color: rgba(255, 255, 255, 0.2); }
+.c-accent.br { bottom: 0; right: 0; border-bottom-color: rgba(255, 255, 255, 0.2); border-right-color: rgba(255, 255, 255, 0.2); }
+
+.holo-module:hover .c-accent {
+  border-color: #05ffa1;
+  width: 15px;
+  height: 15px;
+}
+
+/* Layout */
+.module-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+}
+
+/* Data Side */
+.module-data {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.data-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 15px;
+}
+
+.project-main-info {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.project-logo-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.project-mini-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0.8);
+  transition: all 0.4s ease;
+}
+
+.holo-module:hover .project-mini-logo {
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.1);
+}
+
+.file-id {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.holo-module:hover .file-id {
+  color: #05ffa1;
+  border-color: #05ffa1;
+}
+
+.project-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-status i { color: #05ffa1; }
+
+.module-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0;
+
+}
+
+.module-desc {
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.tech-stack-line {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 20px;
+}
+
+.stack-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tech-item {
+  font-size: 0.8rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 4px;
 }
 
 /* Кнопка перехода (Data Link) */
@@ -370,15 +507,64 @@ onMounted(() => {
   100% { transform: translate(0); text-shadow: 0 0 0 transparent; }
 }
 
-@media (max-width: 1100px) {
-  .slab-frame { flex-direction: column; min-height: auto; }
-  .slab-image-container { flex: 0 0 300px; border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+/* Console Footer */
+.console-footer {
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.sys-message .blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Mobile Adaptive */
+@media (max-width: 992px) {
+  .module-layout {
+    flex-direction: column;
+  }
+  
+  .module-visual {
+    flex: 0 0 250px; /* Фиксированная высота для картинки на мобилках */
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+  }
+
+  .module-data {
+    padding: 30px;
+  }
 }
 
 @media (max-width: 768px) {
-  .slab-content { padding: 30px; }
-  .slab-title { font-size: 1.6rem; }
-  .slab-image-container { flex: 0 0 250px; }
-  .vertical-text { display: none; }
+  .portfolio-section { padding: 40px 0; }
+  .console-body { padding: 20px; }
+  
+  .module-title { font-size: 1.5rem; }
+  .module-desc { font-size: 0.9rem; }
+  
+  .console-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tech-stack-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }
 </style>
