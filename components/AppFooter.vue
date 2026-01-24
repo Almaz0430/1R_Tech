@@ -38,15 +38,15 @@
             <div class="footer-contact-info">
               <div class="contact-item">
                 <span class="item-label">LOC:</span>
-                <span class="item-value">Астана, Кабанбай батыра 51</span>
+                <span class="item-value">Astana, Kazakhstan</span>
               </div>
               <div class="contact-item">
                 <span class="item-label">VOICE:</span>
-                <span class="item-value">+7 (777) 035 40 84</span>
+                <span class="item-value">+7 (700) 808 00-10</span>
               </div>
               <div class="contact-item">
                 <span class="item-label">STREAM:</span>
-                <span class="item-value">almaz.zh7@gmail.com</span>
+                <span class="item-value">onernurzhanov@gmail.com</span>
               </div>
             </div>
           </div>

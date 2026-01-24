@@ -28,7 +28,7 @@
           </div>
           
           <div class="cta-node-wrapper">
-            <a href="mailto:almaz.zh7@gmail.com" class="cta-node">
+            <a href="mailto:onernurzhanov@gmail.com" class="cta-node">
               <span class="btn-text">INITIALIZE_CHAT</span>
               <div class="btn-scanner"></div>
             </a>
@@ -44,14 +44,14 @@
                 <span class="status-text">LOCATION_LOCKED</span>
               </div>
               <div class="scanner-coords">
-                <span>LAT: 51.1221</span>
-                <span>LNG: 71.4115</span>
+                <span>LAT: 51.1605</span>
+                <span>LNG: 71.4704</span>
               </div>
             </div>
             
             <div class="map-window">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.4235055990035!2d71.4114843!3d51.1221205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4245841c5b9d7e9b%3A0x7c3d5a2a3c5f5e4a!2z0J_RgNC-0YHQvy4g0JrQsNCx0LDQvdCx0LDQuSDQkdCw0YLRi9GA0LAsIDUxLCDQkNGB0YLQsNC90LAsINCa0LDQt9Cw0YXRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1688398618122!5m2!1sru!2sru" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d160161.4278458738!2d71.32832565651817!3d51.12836243886588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424580c47db54609%3A0x97f9148dddb1915!2sAstana%2C%20Kazakhstan!5e0!3m2!1sen!2skz!4v1706121345678!5m2!1sen!2skz" 
                 width="100%" 
                 height="100%" 
                 style="border:0;" 
@@ -85,9 +85,9 @@
 
 <script setup>
 const contactNodes = [
-  { type: 'address', icon: 'fas fa-map-marker-alt', label: 'ADDRESS_LOC', value: 'Астана, Кабанбай батыра 51' },
-  { type: 'phone', icon: 'fas fa-phone-alt', label: 'VOICE_ID', value: '+7 (777) 035 40 84' },
-  { type: 'email', icon: 'fas fa-envelope', label: 'DATA_STREAM', value: 'almaz.zh7@gmail.com' }
+  { type: 'address', icon: 'fas fa-map-marker-alt', label: 'ADDRESS_LOC', value: 'Astana, Kazakhstan' },
+  { type: 'phone', icon: 'fas fa-phone-alt', label: 'VOICE_ID', value: '+7 (700) 808 00-10' },
+  { type: 'email', icon: 'fas fa-envelope', label: 'DATA_STREAM', value: 'onernurzhanov@gmail.com' }
 ]
 
 onMounted(() => {

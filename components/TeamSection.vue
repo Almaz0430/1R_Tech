@@ -71,12 +71,30 @@
 <script setup>
 const teamMembers = [
   {
+    name: 'Өнер Нұржанұлы',
+    position: 'Founder & CEO',
+    roleCode: 'FOUNDER_01',
+    photo: '/images/team/Oner.png',
+    social: [
+      { name: 'WhatsApp', icon: 'fab fa-whatsapp', link: 'https://wa.me/77008080010' }
+    ]
+  },
+  {
     name: 'Жанат Алмаз',
     position: 'Lead Frontend Architect',
     roleCode: 'ARC_FR_01',
     photo: '/images/team/Almaz.jpg',
     social: [
       { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/Almaz0430' }
+    ]
+  },
+  {
+    name: 'Арыстан Ергали',
+    position: 'Lead Backend Architect',
+    roleCode: 'DEV_BE_01',
+    photo: '/images/team/Arystan.png',
+    social: [
+      { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/slliry' }
     ]
   }
 ]
