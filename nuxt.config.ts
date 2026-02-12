@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2026-02-13',
   ssr: false,             // полностью фронт
   app: {
     baseURL: '/',         // если на поддомене, укажешь под него, напр. '/blog/'
@@ -8,7 +9,7 @@ export default defineNuxtConfig({
         { src: 'https://cdn.tailwindcss.com' },
         { src: 'https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js' },
         {
-          children: `
+          innerHTML: `
             (function () {
               const style = document.createElement("style");
               style.textContent = \`

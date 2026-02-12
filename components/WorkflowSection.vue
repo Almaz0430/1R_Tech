@@ -2,8 +2,8 @@
   <section id="workflow" class="z-10 border-subtle bg-black border-b relative">
     <div class="container mx-auto px-4 max-w-7xl">
       <div class="flex flex-col lg:flex-row items-start">
-        <!-- Sticky Left Side -->
-        <div class="lg:w-1/2 lg:h-screen lg:min-h-0 sticky top-0 flex flex-col justify-center py-12 lg:py-0 pr-0 lg:pr-20 border-r border-subtle/0 lg:border-subtle self-start">
+        <!-- Sticky Left Side (только на desktop; на мобилке блок статичный) -->
+        <div class="lg:w-1/2 lg:h-screen lg:min-h-0 lg:sticky lg:top-0 flex flex-col justify-center py-12 lg:py-0 pr-0 lg:pr-20 border-r border-subtle/0 lg:border-subtle lg:self-start">
           <h2 class="text-5xl md:text-6xl uppercase mb-8 lg:mb-8 text-white tracking-tighter font-['Space_Grotesk'] font-light">
             Digital
             <br>
