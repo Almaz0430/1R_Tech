@@ -1,8 +1,9 @@
 <template>
   <main>
     <HeroSection />
+    <MarketDominanceSection />
+    <WorkflowSection />
     <PortfolioSection />
-    <AboutSection />
     <TeamSection />
     <ContactSection />
   </main>

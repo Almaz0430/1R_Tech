@@ -1,69 +1,84 @@
 <template>
-  <section id="team" class="section team-section">
-    <div class="container relative-z">
-      <div class="team-header">
-        <h2 class="section-title">Terminal_Team</h2>
-        <p class="section-subtitle">Профессиональная команда разработчиков и архитекторов ПО.</p>
+  <section id="team" class="text-white pt-24 pb-24 border-t border-subtle relative z-10">
+    <div class="container max-w-7xl mx-auto px-4">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 pb-8 border-b border-subtle">
+        <div>
+          <h2 class="text-5xl md:text-7xl uppercase mb-2 text-white tracking-tighter font-['Space_Grotesk'] font-light">
+            Team
+          </h2>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 font-['Geist']">
+            / People / Experts
+          </p>
+        </div>
       </div>
 
-      <div class="team-grid">
-        <div v-for="(member, index) in teamMembers" :key="index" class="team-member" :style="{'--delay': `${index * 0.1}s`}">
-          <div class="member-card">
-            <!-- Технические углы -->
-            <div class="card-corner top-left"></div>
-            <div class="card-corner bottom-right"></div>
-            
-            <div class="member-id">ID_{{ index + 101 }}</div>
-            
-            <div class="member-image-hub">
-              <div class="member-frame">
-                <img :src="member.photo" :alt="member.name" class="member-photo">
-                <div class="scan-line"></div>
-                <div class="frame-overlay"></div>
-              </div>
-              <div class="status-indicator">
-                <span class="status-dot"></span>
-                <span class="status-text">ACTIVE</span>
-              </div>
+      <!-- Team Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+        <div 
+          v-for="(member, index) in teamMembers" 
+          :key="index"
+          class="team-member-card group"
+        >
+          <!-- Member Photo -->
+          <div class="aspect-square bg-neutral-900 overflow-hidden relative mb-6">
+            <img 
+              :src="member.photo" 
+              :alt="member.name" 
+              class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            >
+            <!-- Role Badge -->
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-sm border border-white/10 px-3 py-1 text-[10px] uppercase tracking-widest text-white/80 font-['Geist']">
+              {{ member.roleCode }}
             </div>
+          </div>
 
-            <div class="member-info">
-              <div class="role-tag">ROLE_ID: {{ member.roleCode }}</div>
-              <h3 class="member-name">{{ member.name }}</h3>
-              <p class="member-position">{{ member.position }}</p>
-              
-              <div class="member-social">
-                <a v-for="(social, i) in member.social" :key="i" :href="social.link" class="social-link" :title="social.name">
-                  <i :class="social.icon"></i>
-                  <span class="social-label">VIEW_SOURCE</span>
-                </a>
-              </div>
-            </div>
+          <!-- Member Info -->
+          <div class="mb-6">
+            <h3 class="text-2xl md:text-3xl text-white font-['Space_Grotesk'] tracking-tight font-light mb-2">
+              {{ member.name }}
+            </h3>
+            <p class="text-sm text-neutral-400 font-['Geist']">
+              {{ member.position }}
+            </p>
+          </div>
+
+          <!-- Social Links -->
+          <div class="flex flex-wrap gap-3">
+            <a 
+              v-for="(social, sIndex) in member.social" 
+              :key="sIndex"
+              :href="social.link" 
+              target="_blank" 
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-xs text-white uppercase tracking-widest hover:bg-white hover:text-black transition-colors font-['Geist']"
+            >
+              <iconify-icon :icon="getSocialIcon(social.icon)" class="text-sm"></iconify-icon>
+              <span>{{ getSocialLabel(social.name) }}</span>
+            </a>
           </div>
         </div>
       </div>
-      
-      <div class="team-cta-island">
-        <div class="cta-content">
-          <div class="cta-label">DEPLOY_OPPORTUNITY</div>
-          <h3 class="cta-title">Хотите присоединиться?</h3>
-          <p class="cta-text">Мы всегда рады талантливым специалистам и новым интересным идеям.</p>
-        </div>
-        <a href="#contact" class="cta-btn">
-          INITIALIZE_JOIN_REQ
-          <div class="btn-glow"></div>
+
+      <!-- CTA Section -->
+      <div class="text-center border-t border-subtle pt-24">
+        <h2 class="text-4xl md:text-6xl lg:text-7xl uppercase font-light text-white tracking-tighter font-['Space_Grotesk'] mb-6">
+          <span class="text-white">Хотите</span>
+          <span class="text-neutral-600"> присоединиться?</span>
+        </h2>
+        <p class="text-base md:text-lg text-neutral-400 font-['Geist'] max-w-2xl mx-auto mb-10">
+          Мы всегда рады талантливым специалистам и новым интересным идеям.
+        </p>
+        <a 
+          href="#contact" 
+          class="inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-sm uppercase tracking-widest hover:bg-neutral-200 transition-colors font-['Geist'] border border-white"
+        >
+          <span>Связаться с нами</span>
+          <iconify-icon 
+            icon="solar:arrow-right-bold" 
+            class="text-xs"
+          ></iconify-icon>
         </a>
       </div>
-    </div>
-    
-    <!-- Вертикальный текст слева -->
-    <div class="vertical-text">
-      <span>O</span>
-      <span>F</span>
-      <span>F</span>
-      <span>I</span>
-      <span>C</span>
-      <span>E</span>
     </div>
   </section>
 </template>
@@ -71,27 +86,27 @@
 <script setup>
 const teamMembers = [
   {
-    name: 'Өнер Нұржанұлы',
+    name: 'Oner Nurzhanov',
     position: 'Founder & CEO',
-    roleCode: 'FOUNDER_01',
+    roleCode: 'FOUNDER',
     photo: '/images/team/Oner.png',
     social: [
       { name: 'WhatsApp', icon: 'fab fa-whatsapp', link: 'https://wa.me/77008080010' }
     ]
   },
   {
-    name: 'Жанат Алмаз',
+    name: 'Almaz Zhanat',
     position: 'Lead Frontend Architect',
-    roleCode: 'ARC_FR_01',
+    roleCode: 'FRONTEND',
     photo: '/images/team/Almaz.jpg',
     social: [
       { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/Almaz0430' }
     ]
   },
   {
-    name: 'Арыстан Ергали',
+    name: 'Arystan Ergali',
     position: 'Lead Backend Architect',
-    roleCode: 'DEV_BE_01',
+    roleCode: 'BACKEND',
     photo: '/images/team/Arystan.png',
     social: [
       { name: 'GitHub', icon: 'fab fa-github', link: 'https://github.com/slliry' }
@@ -99,339 +114,25 @@ const teamMembers = [
   }
 ]
 
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view')
-      }
-    });
-  }, { threshold: 0.1 });
+const getSocialIcon = (faIcon) => {
+  const iconMap = {
+    'fab fa-whatsapp': 'logos:whatsapp-icon',
+    'fab fa-github': 'logos:github-icon'
+  }
+  return iconMap[faIcon] || 'solar:link-bold-duotone'
+}
 
-  document.querySelectorAll('.team-member, .team-cta-island').forEach(el => {
-    observer.observe(el);
-  });
-});
+const getSocialLabel = (name) => {
+  const labelMap = {
+    'WhatsApp': 'Contact',
+    'GitHub': 'GitHub'
+  }
+  return labelMap[name] || 'Link'
+}
 </script>
 
 <style scoped>
-.team-section {
-  position: relative;
-  background-color: transparent;
-  padding: 50px 0;
-}
-
-.relative-z {
-  position: relative;
-  z-index: 5;
-}
-
-.team-header {
-  margin-bottom: 70px;
-}
-
-.section-subtitle {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.1rem;
-  margin-top: -20px;
-  letter-spacing: 1px;
-}
-
-/* Сетка карточек */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.team-member {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) var(--delay);
-}
-
-.team-member.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.member-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px 30px;
-  position: relative;
-  transition: all 0.4s ease;
-  overflow: hidden;
-}
-
-.member-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Углы */
-.card-corner {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border: 2px solid transparent;
-}
-
-.card-corner.top-left { top: 15px; left: 15px; border-top-color: rgba(255, 255, 255, 0.2); border-left-color: rgba(255, 255, 255, 0.2); }
-.card-corner.bottom-right { bottom: 15px; right: 15px; border-bottom-color: rgba(255, 255, 255, 0.2); border-right-color: rgba(255, 255, 255, 0.2); }
-
-.member-id {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 2px;
-}
-
-/* Контейнер фото */
-.member-image-hub {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  margin: 0 auto 30px;
-}
-
-.member-frame {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.member-photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  filter: grayscale(1);
-  transition: all 0.5s ease;
-}
-
-.member-card:hover .member-photo {
-  filter: grayscale(0);
-  transform: scale(1.05);
-}
-
-.scan-line {
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
-  animation: scan 3s infinite;
-  opacity: 0;
-}
-
-.member-card:hover .scan-line {
-  opacity: 1;
-}
-
-@keyframes scan {
-  0% { top: -100%; }
-  100% { top: 200%; }
-}
-
-.status-indicator {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: #000;
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.6rem;
-}
-
-.status-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-neon-blue);
-  border-radius: 50%;
-  box-shadow: 0 0 5px var(--color-neon-blue);
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
-
-/* Информация */
-.member-info {
-  text-align: center;
-}
-
-.role-tag {
-  font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.member-name {
-  font-size: 1.4rem;
-  color: #fff;
-  margin-bottom: 5px;
-}
-
-.member-position {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.9rem;
-  margin-bottom: 25px;
-}
-
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #fff;
-  text-decoration: none;
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  transition: all 0.3s ease;
-}
-
-.social-link:hover {
-  background: #fff;
-  color: #000;
-}
-
-/* CTA Остров */
-.team-cta-island {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 30px;
-  padding: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
-}
-
-.team-cta-island.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.cta-label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 3px;
-  margin-bottom: 15px;
-}
-
-.cta-title {
-  font-size: 1.8rem;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.cta-text {
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 500px;
-}
-
-.cta-btn {
-  background: #fff;
-  color: #000;
-  padding: 18px 36px;
-  border-radius: 12px;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  text-decoration: none;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-}
-
-.cta-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Вертикальный текст */
-.vertical-text {
-  position: absolute;
-  left: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  z-index: 5;
-}
-
-.vertical-text span {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.1);
-  text-transform: uppercase;
-  margin: 5px 0;
-}
-
-@media (max-width: 992px) {
-  .team-cta-island {
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .vertical-text {
-    display: none;
-  }
-  
-  .team-cta-island {
-    padding: 30px;
-    margin: 0 15px;
-  }
-  
-  .cta-title {
-    font-size: 1.5rem;
-  }
+.border-subtle {
+  border-color: rgba(255, 255, 255, 0.03);
 }
 </style>
- 
